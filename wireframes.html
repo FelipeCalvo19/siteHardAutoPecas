@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframes - Hard Auto Peças</title>
+    <meta name="description" content="Wireframes e protótipos do site da Hard Auto Peças - estrutura visual e arquitetura da informação.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E50914'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>H</text></svg>">
+    <style>
+        body {
+            background: 
+                linear-gradient(45deg, transparent 40%, rgba(255,107,0,0.03) 40%, rgba(255,107,0,0.03) 60%, transparent 60%),
+                linear-gradient(-45deg, transparent 40%, rgba(255,204,0,0.03) 40%, rgba(255,204,0,0.03) 60%, transparent 60%),
+                #f5f5f5;
+            background-size: 30px 30px;
+        }
+        
+        .wireframes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .wireframe-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-top: 6px solid var(--cor-secundaria);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wireframe-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,107,0,0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.4s ease;
+        }
+        
+        .wireframe-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+        
+        .wireframe-section:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+        
+        .wireframe-section h2 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .wireframe-section h2::before {
+            margin-right: 1rem;
+            font-size: 2rem;
+        }
+        
+        .wireframe-section.desktop h2::before { content: '🖥️'; }
+        .wireframe-section.mobile h2::before { content: '📱'; }
+        .wireframe-section.tablet h2::before { content: '📟'; }
+        .wireframe-section.fluxo h2::before { content: '🔄'; }
+        
+        .wireframe-canvas {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+            min-height: 400px;
+            overflow: hidden;
+        }
+        
+        .wireframe-canvas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+        
+        /* Elementos do Wireframe */
+        .wf-header {
+            background: #dee2e6;
+            height: 60px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .wf-logo {
+            background: var(--cor-secundaria);
+            width: 120px;
+            height: 30px;
+            border-radius: 3px;
+            margin-right: auto;
+        }
+        
+        .wf-nav {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .wf-nav-item {
+            background: #adb5bd;
+            width: 60px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        .wf-hero {
+            background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+            height: 200px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .wf-hero-title {
+            background: var(--cor-primaria);
+            width: 250px;
+            height: 40px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .wf-hero-subtitle {
+            background: #6c757d;
+            width: 180px;
+            height: 20px;
+            border-radius: 3px;
+            margin-bottom: 20px;
+        }
+        
+        .wf-button {
+            background: var(--cor-secundaria);
+            width: 120px;
+            height: 35px;
+            border-radius: 5px;
+        }
+        
+        .wf-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .wf-main {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 250px;
+        }
+        
+        .wf-sidebar {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 250px;
+        }
+        
+        .wf-text-block {
+            background: #adb5bd;
+            height: 15px;
+            margin-bottom: 10px;
+            border-radius: 2px;
+        }
+        
+        .wf-text-block.short {
+            width: 70%;
+        }
+        
+        .wf-text-block.medium {
+            width: 85%;
+        }
+        
+        .wf-text-block.long {
+            width: 95%;
+        }
+        
+        .wf-image {
+            background: linear-gradient(135deg, #dee2e6, #adb5bd);
+            height: 120px;
+            margin: 15px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 2rem;
+        }
+        
+        .wf-footer {
+            background: var(--cor-primaria);
+            height: 80px;
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Wireframe Mobile */
+        .wf-mobile {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .wf-mobile .wf-header {
+            height: 50px;
+        }
+        
+        .wf-mobile .wf-nav {
+            display: none;
+        }
+        
+        .wf-mobile .wf-content {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .wf-mobile .wf-hero {
+            height: 150px;
+        }
+        
+        .wf-mobile .wf-hero-title {
+            width: 200px;
+            height: 30px;
+        }
+        
+        /* Wireframe Tablet */
+        .wf-tablet {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .wf-tablet .wf-content {
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        
+        /* Fluxograma */
+        .fluxo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .fluxo-item {
+            background: white;
+            border: 2px solid var(--cor-secundaria);
+            border-radius: 10px;
+            padding: 15px 25px;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            text-align: center;
+            min-width: 200px;
+            position: relative;
+        }
+        
+        .fluxo-item.inicio {
+            background: var(--cor-secundaria);
+            color: white;
+            border-radius: 50px;
+        }
+        
+        .fluxo-item.decisao {
+            background: var(--cor-destaque);
+            color: var(--cor-primaria);
+            transform: rotate(45deg);
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fluxo-item.decisao span {
+            transform: rotate(-45deg);
+            text-align: center;
+        }
+        
+        .fluxo-item.fim {
+            background: var(--cor-primaria);
+            color: white;
+            border-radius: 50px;
+        }
+        
+        .fluxo-seta {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid var(--cor-secundaria);
+        }
+        
+        .wireframe-info {
+            background: linear-gradient(135deg, rgba(255,107,0,0.05), rgba(255,204,0,0.05));
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 5px solid var(--cor-secundaria);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .wireframe-info h4 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 1rem;
+        }
+        
+        .wireframe-info ul {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .wireframe-info li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .legenda-wireframe {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin: 3rem 0;
+        }
+        
+        .legenda-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .legenda-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .legenda-cor {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .legenda-cor.header { background: #dee2e6; }
+        .legenda-cor.content { background: #f8f9fa; }
+        .legenda-cor.sidebar { background: #e9ecef; }
+        .legenda-cor.button { background: var(--cor-secundaria); }
+        .legenda-cor.footer { background: var(--cor-primaria); }
+        
+        @media (max-width: 768px) {
+            .wireframes-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .wireframe-section {
+                padding: 2rem;
+            }
+            
+            .wf-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .legenda-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">HARD</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                        <li><a href="briefing.html">Briefing</a></li>
+                        <li><a href="listas.html">Listas</a></li>
+                        <li><a href="links.html">Links</a></li>
+                        <li><a href="tabela.html">Tabela</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Wireframes do Site</h1>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 2rem;">
+                    Protótipos e estruturas visuais que orientaram o desenvolvimento do site da Hard Auto Peças.
+                </p>
+
+                <div class="legenda-wireframe">
+                    <h2 class="section-title" style="margin-bottom: 1rem;">📐 Legenda dos Wireframes</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+                        Os wireframes representam a estrutura básica e organização dos elementos em cada página do site.
+                    </p>
+                    
+                    <div class="legenda-grid">
+                        <div class="legenda-item">
+                            <div class="legenda-cor header"></div>
+                            <div>
+                                <strong>Cabeçalho</strong><br>
+                                <small>Logo, navegação principal</small>
+                            </div>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="legenda-cor content"></div>
+                            <div>
+                                <strong>Conteúdo Principal</strong><br>
+                                <small>Área de conteúdo da página</small>
+                            </div>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="legenda-cor sidebar"></div>
+                            <div>
+                                <strong>Barra Lateral</strong><br>
+                                <small>Informações complementares</small>
+                            </div>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="legenda-cor button"></div>
+                            <div>
+                                <strong>Botões/CTAs</strong><br>
+                                <small>Elementos de ação</small>
+                            </div>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="legenda-cor footer"></div>
+                            <div>
+                                <strong>Rodapé</strong><br>
+                                <small>Informações de contato</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wireframes-container">
+                    <!-- Wireframe Desktop -->
+                    <div class="wireframe-section desktop">
+                        <h2>Versão Desktop</h2>
+                        
+                        <div class="wireframe-canvas">
+                            <div class="wf-header">
+                                <div class="wf-logo"></div>
+                                <div class="wf-nav">
+                                    <div class="wf-nav-item"></div>
+                                    <div class="wf-nav-item"></div>
+                                    <div class="wf-nav-item"></div>
+                                    <div class="wf-nav-item"></div>
+                                    <div class="wf-nav-item"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="wf-hero">
+                                <div class="wf-hero-title"></div>
+                                <div class="wf-hero-subtitle"></div>
+                                <div class="wf-button"></div>
+                            </div>
+                            
+                            <div class="wf-content">
+                                <div class="wf-main">
+                                    <div class="wf-text-block long"></div>
+                                    <div class="wf-text-block medium"></div>
+                                    <div class="wf-text-block short"></div>
+                                    <div class="wf-image">🖼️</div>
+                                    <div class="wf-text-block long"></div>
+                                    <div class="wf-text-block medium"></div>
+                                </div>
+                                
+                                <div class="wf-sidebar">
+                                    <div class="wf-text-block medium"></div>
+                                    <div class="wf-text-block short"></div>
+                                    <div class="wf-image">📊</div>
+                                    <div class="wf-text-block long"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="wf-footer"></div>
+                        </div>
+                        
+                        <div class="wireframe-info">
+                            <h4>Características da Versão Desktop</h4>
+                            <ul>
+                                <li>Layout em duas colunas para melhor aproveitamento do espaço</li>
+                                <li>Navegação horizontal completa no cabeçalho</li>
+                                <li>Hero section destacada com call-to-action principal</li>
+                                <li>Sidebar com informações complementares e widgets</li>
+                                <li>Rodapé expandido com múltiplas seções de informações</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Wireframe Mobile -->
+                    <div class="wireframe-section mobile">
+                        <h2>Versão Mobile</h2>
+                        
+                        <div class="wireframe-canvas">
+                            <div class="wf-mobile">
+                                <div class="wf-header">
+                                    <div class="wf-logo"></div>
+                                    <div style="background: #adb5bd; width: 30px; height: 20px; border-radius: 3px;">☰</div>
+                                </div>
+                                
+                                <div class="wf-hero">
+                                    <div class="wf-hero-title"></div>
+                                    <div class="wf-hero-subtitle"></div>
+                                    <div class="wf-button"></div>
+                                </div>
+                                
+                                <div class="wf-content">
+                                    <div class="wf-main">
+                                        <div class="wf-text-block long"></div>
+                                        <div class="wf-text-block medium"></div>
+                                        <div class="wf-image">📱</div>
+                                        <div class="wf-text-block short"></div>
+                                    </div>
+                                    
+                                    <div class="wf-sidebar">
+                                        <div class="wf-text-block medium"></div>
+                                        <div class="wf-text-block long"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="wf-footer"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="wireframe-info">
+                            <h4>Características da Versão Mobile</h4>
+                            <ul>
+                                <li>Layout em coluna única para melhor legibilidade</li>
+                                <li>Menu hambúrguer para navegação compacta</li>
+                                <li>Hero section reduzida mas ainda impactante</li>
+                                <li>Conteúdo empilhado verticalmente</li>
+                                <li>Botões e elementos touch-friendly</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Wireframe Tablet -->
+                    <div class="wireframe-section tablet">
+                        <h2>Versão Tablet</h2>
+                        
+                        <div class="wireframe-canvas">
+                            <div class="wf-tablet">
+                                <div class="wf-header">
+                                    <div class="wf-logo"></div>
+                                    <div class="wf-nav">
+                                        <div class="wf-nav-item"></div>
+                                        <div class="wf-nav-item"></div>
+                                        <div class="wf-nav-item"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="wf-hero">
+                                    <div class="wf-hero-title"></div>
+                                    <div class="wf-hero-subtitle"></div>
+                                    <div class="wf-button"></div>
+                                </div>
+                                
+                                <div class="wf-content">
+                                    <div class="wf-main">
+                                        <div class="wf-text-block long"></div>
+                                        <div class="wf-text-block medium"></div>
+                                        <div class="wf-image">📟</div>
+                                        <div class="wf-text-block short"></div>
+                                    </div>
+                                    
+                                    <div class="wf-sidebar">
+                                        <div class="wf-text-block medium"></div>
+                                        <div class="wf-text-block long"></div>
+                                        <div class="wf-text-block short"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="wf-footer"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="wireframe-info">
+                            <h4>Características da Versão Tablet</h4>
+                            <ul>
+                                <li>Layout híbrido entre desktop e mobile</li>
+                                <li>Navegação simplificada mas ainda horizontal</li>
+                                <li>Conteúdo empilhado para melhor leitura</li>
+                                <li>Elementos dimensionados para toque</li>
+                                <li>Aproveitamento otimizado do espaço disponível</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Fluxo de Navegação -->
+                    <div class="wireframe-section fluxo">
+                        <h2>Fluxo de Navegação</h2>
+                        
+                        <div class="wireframe-canvas">
+                            <div class="fluxo-container">
+                                <div class="fluxo-item inicio">Página Inicial</div>
+                                <div class="fluxo-seta"></div>
+                                
+                                <div class="fluxo-item decisao">
+                                    <span>Usuário<br>Interessado?</span>
+                                </div>
+                                <div class="fluxo-seta"></div>
+                                
+                                <div class="fluxo-item">Produtos</div>
+                                <div class="fluxo-seta"></div>
+                                
+                                <div class="fluxo-item">Detalhes do Produto</div>
+                                <div class="fluxo-seta"></div>
+                                
+                                <div class="fluxo-item">Contato/Orçamento</div>
+                                <div class="fluxo-seta"></div>
+                                
+                                <div class="fluxo-item fim">Conversão</div>
+                            </div>
+                        </div>
+                        
+                        <div class="wireframe-info">
+                            <h4>Fluxo Principal de Navegação</h4>
+                            <ul>
+                                <li>Entrada pela página inicial com apresentação da empresa</li>
+                                <li>Direcionamento para catálogo de produtos</li>
+                                <li>Visualização de detalhes e especificações</li>
+                                <li>Solicitação de orçamento ou contato direto</li>
+                                <li>Conversão em lead ou venda</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações sobre Arquitetura da Informação -->
+                <div style="background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 4rem 0;">
+                    <h2 class="section-title" style="margin-bottom: 2rem;">🏗️ Arquitetura da Informação</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem; display: flex; align-items: center;">
+                                🎯 <span style="margin-left: 0.5rem;">Objetivos</span>
+                            </h3>
+                            <ul style="color: #666; line-height: 1.8;">
+                                <li>Facilitar a navegação intuitiva</li>
+                                <li>Destacar produtos e serviços</li>
+                                <li>Gerar leads qualificados</li>
+                                <li>Transmitir confiabilidade</li>
+                                <li>Otimizar conversões</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem; display: flex; align-items: center;">
+                                📊 <span style="margin-left: 0.5rem;">Hierarquia</span>
+                            </h3>
+                            <ul style="color: #666; line-height: 1.8;">
+                                <li><strong>Nível 1:</strong> Páginas principais</li>
+                                <li><strong>Nível 2:</strong> Categorias de produtos</li>
+                                <li><strong>Nível 3:</strong> Produtos específicos</li>
+                                <li><strong>Nível 4:</strong> Detalhes técnicos</li>
+                                <li><strong>Suporte:</strong> Documentos e ajuda</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem; display: flex; align-items: center;">
+                                🔍 <span style="margin-left: 0.5rem;">Usabilidade</span>
+                            </h3>
+                            <ul style="color: #666; line-height: 1.8;">
+                                <li>Navegação consistente</li>
+                                <li>Busca eficiente</li>
+                                <li>Filtros inteligentes</li>
+                                <li>Breadcrumbs claros</li>
+                                <li>CTAs estratégicos</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem; display: flex; align-items: center;">
+                                📱 <span style="margin-left: 0.5rem;">Responsividade</span>
+                            </h3>
+                            <ul style="color: #666; line-height: 1.8;">
+                                <li>Design mobile-first</li>
+                                <li>Breakpoints otimizados</li>
+                                <li>Touch-friendly interfaces</li>
+                                <li>Performance em dispositivos</li>
+                                <li>Acessibilidade garantida</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metodologia de Desenvolvimento -->
+                <div style="background: linear-gradient(135deg, rgba(255,107,0,0.05), rgba(255,204,0,0.05)); padding: 3rem; border-radius: 20px; margin: 4rem 0; border-left: 6px solid var(--cor-secundaria);">
+                    <h2 class="section-title" style="margin-bottom: 2rem;">⚙️ Metodologia de Desenvolvimento</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                        <div style="text-align: center;">
+                            <div style="background: var(--cor-secundaria); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">1</div>
+                            <h4 style="color: var(--cor-primaria); margin-bottom: 1rem;">Pesquisa</h4>
+                            <p style="color: #666; line-height: 1.6;">Análise de concorrentes, público-alvo e melhores práticas do setor automotivo.</p>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="background: var(--cor-secundaria); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">2</div>
+                            <h4 style="color: var(--cor-primaria); margin-bottom: 1rem;">Wireframes</h4>
+                            <p style="color: #666; line-height: 1.6;">Criação de protótipos de baixa fidelidade para definir estrutura e fluxos.</p>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="background: var(--cor-secundaria); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">3</div>
+                            <h4 style="color: var(--cor-primaria); margin-bottom: 1rem;">Design</h4>
+                            <p style="color: #666; line-height: 1.6;">Desenvolvimento visual com identidade da marca e elementos de interface.</p>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="background: var(--cor-secundaria); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">4</div>
+                            <h4 style="color: var(--cor-primaria); margin-bottom: 1rem;">Desenvolvimento</h4>
+                            <p style="color: #666; line-height: 1.6;">Codificação responsiva com HTML5, CSS3 e JavaScript moderno.</p>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="background: var(--cor-secundaria); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">5</div>
+                            <h4 style="color: var(--cor-primaria); margin-bottom: 1rem;">Testes</h4>
+                            <p style="color: #666; line-height: 1.6;">Validação em diferentes dispositivos, browsers e cenários de uso.</p>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="background: var(--cor-secundaria); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">6</div>
+                            <h4 style="color: var(--cor-primaria); margin-bottom: 1rem;">Deploy</h4>
+                            <p style="color: #666; line-height: 1.6;">Publicação e otimização para performance, SEO e acessibilidade.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 (11) 98765-4321</p>
+                    <p>✉️ contato@hardautopecas.com.br</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Rua das Autopeças, 1234</p>
+                    <p>Vila Industrial - São Paulo/SP</p>
+                    <p>CEP: 01234-567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 18h</p>
+                    <p>Sábado: 8h às 12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hard Auto Peças. Todos os direitos reservados.</p>
+                <p>Desenvolvido por: Grupo 1 - Programação Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="voltar-topo" id="voltarTopo">↑</a>
+
+    <script>
+        // Botão voltar ao topo
+        const voltarTopo = document.getElementById('voltarTopo');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                voltarTopo.classList.add('show');
+            } else {
+                voltarTopo.classList.remove('show');
+            }
+        });
+
+        voltarTopo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animação de entrada das seções
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.wireframe-section, .legenda-wireframe').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s ease';
+            observer.observe(element);
+        });
+
+        // Interatividade nos wireframes
+        document.querySelectorAll('.wireframe-canvas').forEach(canvas => {
+            canvas.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            canvas.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Animação dos elementos do fluxo
+        document.querySelectorAll('.fluxo-item').forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.2}s`;
+            item.style.animation = 'fadeInUp 0.6s ease forwards';
+        });
+
+        // CSS para animação
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Tooltip para elementos do wireframe
+        document.querySelectorAll('.wf-logo, .wf-nav-item, .wf-button, .wf-image').forEach(element => {
+            element.addEventListener('mouseenter', function(e) {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'wireframe-tooltip';
+                tooltip.style.cssText = `
+                    position: absolute;
+                    background: var(--cor-primaria);
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                    font-size: 0.8rem;
+                    z-index: 1000;
+                    pointer-events: none;
+                    white-space: nowrap;
+                `;
+                
+                if (this.classList.contains('wf-logo')) tooltip.textContent = 'Logo da Empresa';
+                else if (this.classList.contains('wf-nav-item')) tooltip.textContent = 'Item de Navegação';
+                else if (this.classList.contains('wf-button')) tooltip.textContent = 'Botão de Ação';
+                else if (this.classList.contains('wf-image')) tooltip.textContent = 'Área de Imagem';
+                
+                document.body.appendChild(tooltip);
+                
+                const rect = this.getBoundingClientRect();
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.top = (rect.top - 30) + 'px';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                const tooltip = document.querySelector('.wireframe-tooltip');
+                if (tooltip) tooltip.remove();
+            });
+        });
+    </script>
+</body>
+</html>

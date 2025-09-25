@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Hard Auto Peças</title>
+    <meta name="description" content="Entre em contato com a Hard Auto Peças. Telefone, e-mail, endereço e formulário de contato para dúvidas e orçamentos.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E50914'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>H</text></svg>">
+    <style>
+        body {
+            background: radial-gradient(circle at center, #f5f5f5 0%, #e0e0e0 100%);
+        }
+        
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .contato-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .contato-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(255,107,0,0.05), rgba(255,204,0,0.05));
+            border-radius: 10px;
+            border-left: 4px solid var(--cor-secundaria);
+        }
+        
+        .info-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--cor-secundaria);
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .info-content h3 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-content p {
+            color: #666;
+            margin: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--cor-primaria);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: var(--fonte-principal);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--cor-secundaria);
+            box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-submit {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .mapa {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .mapa-placeholder {
+            background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+        
+        .horarios {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        
+        .horarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .horario-item {
+            background: linear-gradient(135deg, rgba(255,107,0,0.05), rgba(255,204,0,0.05));
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid rgba(255,107,0,0.1);
+        }
+        
+        .horario-item.fechado {
+            background: linear-gradient(135deg, rgba(150,150,150,0.05), rgba(100,100,100,0.05));
+            border-color: rgba(150,150,150,0.2);
+        }
+        
+        .horario-dia {
+            font-weight: 600;
+            color: var(--cor-primaria);
+            margin-bottom: 0.5rem;
+        }
+        
+        .horario-hora {
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .contato-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .contato-info,
+            .contato-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">HARD AUTO PEÇAS</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Entre em Contato</h1>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 3rem;">
+                    Estamos sempre prontos para atendê-lo! Entre em contato conosco para dúvidas, orçamentos ou informações sobre nossos produtos e serviços.
+                </p>
+
+                <div class="contato-grid">
+                    <!-- Informações de Contato -->
+                    <div class="contato-info">
+                        <h2 style="font-family: var(--fonte-titulos); color: var(--cor-primaria); margin-bottom: 2rem;">Informações de Contato</h2>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📞</div>
+                            <div class="info-content">
+                                <h3>Telefone</h3>
+                                <p>(11) 3456-7890</p>
+                                <p>Segunda a Sexta: 8h às 18h</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">📱</div>
+                            <div class="info-content">
+                                <h3>WhatsApp</h3>
+                                <p>(11) 98765-4321</p>
+                                <p>Atendimento rápido e direto</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">✉️</div>
+                            <div class="info-content">
+                                <h3>E-mail</h3>
+                                <p>contato@hardautopecas.com.br</p>
+                                <p>Resposta em até 2 horas</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div class="info-content">
+                                <h3>Endereço</h3>
+                                <p>Rua das Autopeças, 1234</p>
+                                <p>Vila Industrial - São Paulo/SP</p>
+                                <p>CEP: 01234-567</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">🌐</div>
+                            <div class="info-content">
+                                <h3>Redes Sociais</h3>
+                                <p>@hardautopecas</p>
+                                <p>Facebook | Instagram | LinkedIn</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulário de Contato -->
+                    <div class="contato-form">
+                        <h2 style="font-family: var(--fonte-titulos); color: var(--cor-primaria); margin-bottom: 2rem;">Envie sua Mensagem</h2>
+                        
+                        <form id="contatoForm">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo *</label>
+                                <input type="text" id="nome" name="nome" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">E-mail *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telefone">Telefone</label>
+                                <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="empresa">Empresa/Oficina</label>
+                                <input type="text" id="empresa" name="empresa">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="assunto">Assunto *</label>
+                                <select id="assunto" name="assunto" required>
+                                    <option value="">Selecione um assunto</option>
+                                    <option value="orcamento">Solicitação de Orçamento</option>
+                                    <option value="duvida">Dúvida sobre Produto</option>
+                                    <option value="suporte">Suporte Técnico</option>
+                                    <option value="parceria">Parceria Comercial</option>
+                                    <option value="reclamacao">Reclamação</option>
+                                    <option value="sugestao">Sugestão</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mensagem">Mensagem *</label>
+                                <textarea id="mensagem" name="mensagem" placeholder="Descreva sua solicitação ou dúvida..." required></textarea>
+                            </div>
+
+                            <div class="form-submit">
+                                <button type="submit" class="btn">Enviar Mensagem</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Horários de Funcionamento -->
+                <div class="horarios">
+                    <h2 class="section-title" style="margin-bottom: 2rem;">Horários de Funcionamento</h2>
+                    <div class="horarios-grid">
+                        <div class="horario-item">
+                            <div class="horario-dia">Segunda-feira</div>
+                            <div class="horario-hora">8h às 18h</div>
+                        </div>
+                        <div class="horario-item">
+                            <div class="horario-dia">Terça-feira</div>
+                            <div class="horario-hora">8h às 18h</div>
+                        </div>
+                        <div class="horario-item">
+                            <div class="horario-dia">Quarta-feira</div>
+                            <div class="horario-hora">8h às 18h</div>
+                        </div>
+                        <div class="horario-item">
+                            <div class="horario-dia">Quinta-feira</div>
+                            <div class="horario-hora">8h às 18h</div>
+                        </div>
+                        <div class="horario-item">
+                            <div class="horario-dia">Sexta-feira</div>
+                            <div class="horario-hora">8h às 18h</div>
+                        </div>
+                        <div class="horario-item">
+                            <div class="horario-dia">Sábado</div>
+                            <div class="horario-hora">8h às 12h</div>
+                        </div>
+                        <div class="horario-item fechado">
+                            <div class="horario-dia">Domingo</div>
+                            <div class="horario-hora">Fechado</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mapa -->
+                <div class="mapa">
+                    <h2 class="section-title" style="margin-bottom: 2rem;">Nossa Localização</h2>
+                    <p style="color: #666; margin-bottom: 1rem;">
+                        Estamos localizados na Vila Industrial, região central de São Paulo, com fácil acesso por transporte público e particular.
+                    </p>
+                    <div class="mapa-placeholder">
+                        🗺️ Mapa Interativo<br>
+                        Rua das Autopeças, 1234 - Vila Industrial<br>
+                        São Paulo/SP - CEP: 01234-567
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 1rem;">
+                        <strong>Como chegar:</strong> Próximo ao Metrô Vila Madalena (Linha 2-Verde) e diversas linhas de ônibus. Estacionamento gratuito disponível.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 (11) 98765-4321</p>
+                    <p>✉️ contato@hardautopecas.com.br</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Rua das Autopeças, 1234</p>
+                    <p>Vila Industrial - São Paulo/SP</p>
+                    <p>CEP: 01234-567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 18h</p>
+                    <p>Sábado: 8h às 12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hard Auto Peças. Todos os direitos reservados.</p>
+                <p>Desenvolvido por: Grupo 1 - Programação Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="voltar-topo" id="voltarTopo">↑</a>
+
+    <script>
+        // Formulário de contato
+        document.getElementById('contatoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simular envio do formulário
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Enviando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                this.reset();
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 2000);
+        });
+
+        // Máscara para telefone
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 7) {
+                value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+            }
+            e.target.value = value;
+        });
+
+        // Botão voltar ao topo
+        const voltarTopo = document.getElementById('voltarTopo');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                voltarTopo.classList.add('show');
+            } else {
+                voltarTopo.classList.remove('show');
+            }
+        });
+
+        voltarTopo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animação de entrada dos elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.contato-info, .contato-form, .horarios, .mapa').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.6s ease';
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

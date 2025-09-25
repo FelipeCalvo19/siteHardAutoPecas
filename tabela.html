@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Produtos - Hard Auto Peças</title>
+    <meta name="description" content="Tabela completa com preços e especificações dos produtos da Hard Auto Peças.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E50914'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>H</text></svg>">
+    <style>
+        body {
+            background: 
+                linear-gradient(90deg, rgba(255,107,0,0.03) 50%, transparent 50%),
+                linear-gradient(rgba(255,204,0,0.03) 50%, transparent 50%);
+            background-size: 50px 50px;
+        }
+        
+        .tabela-container {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .tabela-principal {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .tabela-principal th {
+            background: linear-gradient(135deg, var(--cor-primaria) 0%, #2a2a2a 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-family: var(--fonte-titulos);
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        .tabela-principal th::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque));
+        }
+        
+        .tabela-principal td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .tabela-principal tbody tr:hover {
+            background-color: rgba(255,107,0,0.05);
+            transform: scale(1.01);
+        }
+        
+        /* Cores alternadas para linhas */
+        .tabela-principal tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+        
+        .tabela-principal tbody tr:nth-child(even) {
+            background-color: white;
+        }
+        
+        /* Cores especiais para células mescladas */
+        .categoria-motor {
+            background: linear-gradient(135deg, rgba(220,53,69,0.1), rgba(220,53,69,0.05)) !important;
+            font-weight: 600;
+            color: #dc3545;
+        }
+        
+        .categoria-freios {
+            background: linear-gradient(135deg, rgba(40,167,69,0.1), rgba(40,167,69,0.05)) !important;
+            font-weight: 600;
+            color: #28a745;
+        }
+        
+        .categoria-suspensao {
+            background: linear-gradient(135deg, rgba(23,162,184,0.1), rgba(23,162,184,0.05)) !important;
+            font-weight: 600;
+            color: #17a2b8;
+        }
+        
+        .categoria-eletrica {
+            background: linear-gradient(135deg, rgba(255,193,7,0.1), rgba(255,193,7,0.05)) !important;
+            font-weight: 600;
+            color: #ffc107;
+        }
+        
+        .categoria-acessorios {
+            background: linear-gradient(135deg, rgba(108,117,125,0.1), rgba(108,117,125,0.05)) !important;
+            font-weight: 600;
+            color: #6c757d;
+        }
+        
+        /* Estilos para preços */
+        .preco {
+            font-weight: 700;
+            color: var(--cor-secundaria);
+            font-size: 1.1rem;
+        }
+        
+        .preco-promocional {
+            background: linear-gradient(135deg, rgba(255,107,0,0.2), rgba(255,204,0,0.1));
+            color: var(--cor-primaria);
+            font-weight: 700;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        /* Status de estoque */
+        .estoque-alto {
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .estoque-medio {
+            background: #fff3cd;
+            color: #856404;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .estoque-baixo {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* Códigos de produto */
+        .codigo-produto {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+        
+        .legenda {
+            background: linear-gradient(135deg, rgba(255,107,0,0.05), rgba(255,204,0,0.05));
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--cor-secundaria);
+        }
+        
+        .legenda h3 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 1rem;
+        }
+        
+        .legenda-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .legenda-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .cor-exemplo {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .filtros-tabela {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filtros-tabela label {
+            font-weight: 600;
+            color: var(--cor-primaria);
+        }
+        
+        .filtros-tabela select,
+        .filtros-tabela input {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .filtros-tabela select:focus,
+        .filtros-tabela input:focus {
+            outline: none;
+            border-color: var(--cor-secundaria);
+        }
+        
+        @media (max-width: 768px) {
+            .tabela-principal {
+                font-size: 0.8rem;
+            }
+            
+            .tabela-principal th,
+            .tabela-principal td {
+                padding: 8px 6px;
+            }
+            
+            .filtros-tabela {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">HARD AUTO PEÇAS</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Tabela de Produtos e Preços</h1>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 2rem;">
+                    Consulte nossa tabela completa com produtos, preços atualizados e disponibilidade em estoque.
+                </p>
+
+                <!-- Filtros -->
+                <div class="filtros-tabela">
+                    <label for="filtroCategoria">Categoria:</label>
+                    <select id="filtroCategoria">
+                        <option value="">Todas as Categorias</option>
+                        <option value="motor">Motor</option>
+                        <option value="freios">Freios</option>
+                        <option value="suspensao">Suspensão</option>
+                        <option value="eletrica">Elétrica</option>
+                        <option value="acessorios">Acessórios</option>
+                    </select>
+                    
+                    <label for="filtroEstoque">Estoque:</label>
+                    <select id="filtroEstoque">
+                        <option value="">Todos</option>
+                        <option value="alto">Alto</option>
+                        <option value="medio">Médio</option>
+                        <option value="baixo">Baixo</option>
+                    </select>
+                    
+                    <label for="filtroBusca">Buscar:</label>
+                    <input type="text" id="filtroBusca" placeholder="Nome do produto...">
+                </div>
+
+                <div class="tabela-container">
+                    <table class="tabela-principal" id="tabelaProdutos">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Produto</th>
+                                <th>Categoria</th>
+                                <th>Preço (R$)</th>
+                                <th>Estoque</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Categoria Motor -->
+                            <tr data-categoria="motor">
+                                <td><span class="codigo-produto">HAP-001</span></td>
+                                <td>Kit de Pistões 1.0</td>
+                                <td class="categoria-motor">Motor</td>
+                                <td class="preco">R$ 450,00</td>
+                                <td><span class="estoque-alto">Alto</span></td>
+                            </tr>
+                            <tr data-categoria="motor">
+                                <td><span class="codigo-produto">HAP-002</span></td>
+                                <td>Filtro de Óleo</td>
+                                <td class="categoria-motor">Motor</td>
+                                <td class="preco">R$ 25,90</td>
+                                <td><span class="estoque-alto">Alto</span></td>
+                            </tr>
+                            <tr data-categoria="motor">
+                                <td><span class="codigo-produto">HAP-003</span></td>
+                                <td>Vela de Ignição NGK</td>
+                                <td class="categoria-motor">Motor</td>
+                                <td class="preco-promocional">R$ 35,00</td>
+                                <td><span class="estoque-medio">Médio</span></td>
+                            </tr>
+                            
+                            <!-- Categoria Freios -->
+                            <tr data-categoria="freios">
+                                <td><span class="codigo-produto">HAP-004</span></td>
+                                <td>Pastilha de Freio Dianteira</td>
+                                <td class="categoria-freios">Freios</td>
+                                <td class="preco">R$ 120,00</td>
+                                <td><span class="estoque-alto">Alto</span></td>
+                            </tr>
+                            <tr data-categoria="freios">
+                                <td><span class="codigo-produto">HAP-005</span></td>
+                                <td>Disco de Freio Ventilado</td>
+                                <td class="categoria-freios">Freios</td>
+                                <td class="preco">R$ 180,00</td>
+                                <td><span class="estoque-medio">Médio</span></td>
+                            </tr>
+                            <tr data-categoria="freios">
+                                <td><span class="codigo-produto">HAP-006</span></td>
+                                <td>Fluido de Freio DOT 4</td>
+                                <td class="categoria-freios">Freios</td>
+                                <td class="preco">R$ 28,50</td>
+                                <td><span class="estoque-baixo">Baixo</span></td>
+                            </tr>
+                            
+                            <!-- Categoria Suspensão -->
+                            <tr data-categoria="suspensao">
+                                <td><span class="codigo-produto">HAP-007</span></td>
+                                <td>Amortecedor Dianteiro Monroe</td>
+                                <td class="categoria-suspensao">Suspensão</td>
+                                <td class="preco">R$ 240,00</td>
+                                <td><span class="estoque-alto">Alto</span></td>
+                            </tr>
+                            <tr data-categoria="suspensao">
+                                <td><span class="codigo-produto">HAP-008</span></td>
+                                <td>Mola Helicoidal Traseira</td>
+                                <td class="categoria-suspensao">Suspensão</td>
+                                <td class="preco">R$ 95,00</td>
+                                <td><span class="estoque-medio">Médio</span></td>
+                            </tr>
+                            <tr data-categoria="suspensao">
+                                <td><span class="codigo-produto">HAP-009</span></td>
+                                <td>Kit de Buchas Completo</td>
+                                <td class="categoria-suspensao">Suspensão</td>
+                                <td class="preco-promocional">R$ 85,00</td>
+                                <td><span class="estoque-alto">Alto</span></td>
+                            </tr>
+                            
+                            <!-- Categoria Elétrica -->
+                            <tr data-categoria="eletrica">
+                                <td><span class="codigo-produto">HAP-010</span></td>
+                                <td>Bateria 60Ah Moura</td>
+                                <td class="categoria-eletrica">Elétrica</td>
+                                <td class="preco">R$ 350,00</td>
+                                <td><span class="estoque-medio">Médio</span></td>
+                            </tr>
+                            <tr data-categoria="eletrica">
+                                <td><span class="codigo-produto">HAP-011</span></td>
+                                <td>Alternador Remanufaturado</td>
+                                <td class="categoria-eletrica">Elétrica</td>
+                                <td class="preco">R$ 420,00</td>
+                                <td><span class="estoque-baixo">Baixo</span></td>
+                            </tr>
+                            <tr data-categoria="eletrica">
+                                <td><span class="codigo-produto">HAP-012</span></td>
+                                <td>Motor de Partida</td>
+                                <td class="categoria-eletrica">Elétrica</td>
+                                <td class="preco">R$ 380,00</td>
+                                <td><span class="estoque-alto">Alto</span></td>
+                            </tr>
+                            
+                            <!-- Categoria Acessórios -->
+                            <tr data-categoria="acessorios">
+                                <td><span class="codigo-produto">HAP-013</span></td>
+                                <td>Óleo Motor 5W30 Sintético</td>
+                                <td class="categoria-acessorios">Acessórios</td>
+                                <td class="preco">R$ 85,00</td>
+                                <td><span class="estoque-alto">Alto</span></td>
+                            </tr>
+                            <tr data-categoria="acessorios">
+                                <td><span class="codigo-produto">HAP-014</span></td>
+                                <td>Pneu 185/65R15</td>
+                                <td class="categoria-acessorios">Acessórios</td>
+                                <td class="preco">R$ 280,00</td>
+                                <td><span class="estoque-medio">Médio</span></td>
+                            </tr>
+                            <tr data-categoria="acessorios">
+                                <td><span class="codigo-produto">HAP-015</span></td>
+                                <td>Kit Ferramentas Básico</td>
+                                <td class="categoria-acessorios">Acessórios</td>
+                                <td class="preco-promocional">R$ 150,00</td>
+                                <td><span class="estoque-baixo">Baixo</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Legenda -->
+                <div class="legenda">
+                    <h3>📋 Legenda da Tabela</h3>
+                    <div class="legenda-grid">
+                        <div class="legenda-item">
+                            <div class="cor-exemplo categoria-motor"></div>
+                            <span>Categoria Motor</span>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="cor-exemplo categoria-freios"></div>
+                            <span>Categoria Freios</span>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="cor-exemplo categoria-suspensao"></div>
+                            <span>Categoria Suspensão</span>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="cor-exemplo categoria-eletrica"></div>
+                            <span>Categoria Elétrica</span>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="cor-exemplo categoria-acessorios"></div>
+                            <span>Categoria Acessórios</span>
+                        </div>
+                        <div class="legenda-item">
+                            <span class="estoque-alto">Alto</span>
+                            <span>Estoque Alto (50+ unidades)</span>
+                        </div>
+                        <div class="legenda-item">
+                            <span class="estoque-medio">Médio</span>
+                            <span>Estoque Médio (10-49 unidades)</span>
+                        </div>
+                        <div class="legenda-item">
+                            <span class="estoque-baixo">Baixo</span>
+                            <span>Estoque Baixo (1-9 unidades)</span>
+                        </div>
+                        <div class="legenda-item">
+                            <span class="preco-promocional" style="padding: 2px 8px; border-radius: 4px;">Promoção</span>
+                            <span>Preço Promocional</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Adicionais -->
+                <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin: 2rem 0;">
+                    <h2 class="section-title" style="margin-bottom: 2rem;">ℹ️ Informações Importantes</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem;">💰 Preços</h3>
+                            <p style="color: #666; line-height: 1.6;">Os preços apresentados são válidos para pagamento à vista. Consulte condições especiais para pagamento parcelado e descontos para grandes quantidades.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem;">📦 Estoque</h3>
+                            <p style="color: #666; line-height: 1.6;">O estoque é atualizado em tempo real. Produtos com estoque baixo podem ter prazo de entrega estendido. Consulte disponibilidade antes de finalizar o pedido.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem;">🔄 Atualização</h3>
+                            <p style="color: #666; line-height: 1.6;">Esta tabela é atualizada diariamente. Para informações mais precisas sobre preços e disponibilidade, entre em contato com nossa equipe comercial.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem;">📞 Orçamentos</h3>
+                            <p style="color: #666; line-height: 1.6;">Solicite orçamentos personalizados para grandes quantidades ou produtos não listados. Oferecemos condições especiais para oficinas e revendedores.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 (11) 98765-4321</p>
+                    <p>✉️ contato@hardautopecas.com.br</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Rua das Autopeças, 1234</p>
+                    <p>Vila Industrial - São Paulo/SP</p>
+                    <p>CEP: 01234-567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 18h</p>
+                    <p>Sábado: 8h às 12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hard Auto Peças. Todos os direitos reservados.</p>
+                <p>Desenvolvido por: Grupo 1 - Programação Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="voltar-topo" id="voltarTopo">↑</a>
+
+    <script>
+        // Botão voltar ao topo
+        const voltarTopo = document.getElementById('voltarTopo');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                voltarTopo.classList.add('show');
+            } else {
+                voltarTopo.classList.remove('show');
+            }
+        });
+
+        voltarTopo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Sistema de filtros da tabela
+        const filtroCategoria = document.getElementById('filtroCategoria');
+        const filtroEstoque = document.getElementById('filtroEstoque');
+        const filtroBusca = document.getElementById('filtroBusca');
+        const linhasTabela = document.querySelectorAll('#tabelaProdutos tbody tr');
+
+        function filtrarTabela() {
+            const categoriaFiltro = filtroCategoria.value.toLowerCase();
+            const estoqueFiltro = filtroEstoque.value.toLowerCase();
+            const buscaFiltro = filtroBusca.value.toLowerCase();
+
+            linhasTabela.forEach(linha => {
+                const categoria = linha.getAttribute('data-categoria');
+                const produto = linha.cells[1].textContent.toLowerCase();
+                const estoque = linha.cells[4].textContent.toLowerCase();
+
+                const categoriaMatch = !categoriaFiltro || categoria === categoriaFiltro;
+                const estoqueMatch = !estoqueFiltro || estoque.includes(estoqueFiltro);
+                const buscaMatch = !buscaFiltro || produto.includes(buscaFiltro);
+
+                if (categoriaMatch && estoqueMatch && buscaMatch) {
+                    linha.style.display = '';
+                } else {
+                    linha.style.display = 'none';
+                }
+            });
+        }
+
+        filtroCategoria.addEventListener('change', filtrarTabela);
+        filtroEstoque.addEventListener('change', filtrarTabela);
+        filtroBusca.addEventListener('input', filtrarTabela);
+
+        // Animação de entrada da tabela
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.tabela-container, .legenda, .filtros-tabela').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.6s ease';
+            observer.observe(element);
+        });
+
+        // Destacar linha ao clicar
+        linhasTabela.forEach(linha => {
+            linha.addEventListener('click', function() {
+                // Remove destaque de outras linhas
+                linhasTabela.forEach(l => l.style.backgroundColor = '');
+                
+                // Adiciona destaque à linha clicada
+                this.style.backgroundColor = 'rgba(255,107,0,0.1)';
+                
+                // Remove destaque após 3 segundos
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                }, 3000);
+            });
+        });
+
+        // Ordenação da tabela
+        document.querySelectorAll('.tabela-principal th').forEach((header, index) => {
+            header.style.cursor = 'pointer';
+            header.addEventListener('click', () => {
+                sortTable(index);
+            });
+        });
+
+        function sortTable(columnIndex) {
+            const table = document.getElementById('tabelaProdutos');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            rows.sort((a, b) => {
+                const aText = a.cells[columnIndex].textContent.trim();
+                const bText = b.cells[columnIndex].textContent.trim();
+                
+                // Se for coluna de preço, ordenar numericamente
+                if (columnIndex === 3) {
+                    const aPrice = parseFloat(aText.replace('R$', '').replace(',', '.'));
+                    const bPrice = parseFloat(bText.replace('R$', '').replace(',', '.'));
+                    return aPrice - bPrice;
+                }
+                
+                return aText.localeCompare(bText);
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+</body>
+</html>

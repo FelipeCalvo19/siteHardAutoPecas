@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listas - Hard Auto Peças</title>
+    <meta name="description" content="Demonstração de todos os tipos de listas HTML utilizados no site da Hard Auto Peças.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E50914'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>H</text></svg>">
+    <style>
+        body {
+            background: radial-gradient(ellipse at top, #f5f5f5, #e0e0e0);
+        }
+        
+        .lista-section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--cor-secundaria);
+        }
+        
+        .lista-section h2 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .lista-section h2::before {
+            content: '📋';
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .exemplo-lista {
+            background: linear-gradient(135deg, rgba(255,107,0,0.05), rgba(255,204,0,0.05));
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--cor-secundaria);
+        }
+        
+        .codigo-html {
+            background: #2a2a2a;
+            color: #f0f0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border: 1px solid #444;
+        }
+        
+        /* Estilos para listas ordenadas */
+        .lista-decimal { list-style-type: decimal; }
+        .lista-decimal-zero { list-style-type: decimal-leading-zero; }
+        .lista-romana-maiuscula { list-style-type: upper-roman; }
+        .lista-romana-minuscula { list-style-type: lower-roman; }
+        .lista-alfa-maiuscula { list-style-type: upper-alpha; }
+        .lista-alfa-minuscula { list-style-type: lower-alpha; }
+        .lista-grega-minuscula { list-style-type: lower-greek; }
+        
+        /* Estilos para listas não ordenadas */
+        .lista-disc { list-style-type: disc; }
+        .lista-circle { list-style-type: circle; }
+        .lista-square { list-style-type: square; }
+        .lista-none { list-style-type: none; }
+        
+        /* Listas personalizadas */
+        .lista-personalizada {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .lista-personalizada li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .lista-personalizada.icone-seta li::before {
+            content: '▶';
+            color: var(--cor-secundaria);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .lista-personalizada.icone-check li::before {
+            content: '✓';
+            color: #28a745;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .lista-personalizada.icone-estrela li::before {
+            content: '★';
+            color: var(--cor-destaque);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .lista-personalizada.icone-engrenagem li::before {
+            content: '⚙';
+            color: var(--cor-primaria);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* Lista de definições personalizada */
+        .lista-definicoes dt {
+            font-weight: bold;
+            color: var(--cor-primaria);
+            margin-top: 1rem;
+            font-family: var(--fonte-titulos);
+        }
+        
+        .lista-definicoes dd {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: #666;
+            border-left: 3px solid var(--cor-secundaria);
+            padding-left: 1rem;
+        }
+        
+        /* Lista aninhada estilizada */
+        .lista-aninhada {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .lista-aninhada ul {
+            margin-left: 1.5rem;
+        }
+        
+        .lista-aninhada li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        /* Lista horizontal */
+        .lista-horizontal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .lista-horizontal li {
+            background: var(--cor-secundaria);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .lista-horizontal li:hover {
+            background: var(--cor-primaria);
+            transform: translateY(-2px);
+        }
+        
+        /* Lista com numeração personalizada */
+        .lista-numeracao-personalizada {
+            counter-reset: custom-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .lista-numeracao-personalizada li {
+            counter-increment: custom-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .lista-numeracao-personalizada li::before {
+            content: counter(custom-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--cor-secundaria);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">HARD AUTO PEÇAS</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Tipos de Listas HTML</h1>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 3rem;">
+                    Demonstração completa de todos os tipos de listas HTML e seus diferentes estilos de marcadores.
+                </p>
+
+                <!-- Listas Ordenadas -->
+                <div class="lista-section">
+                    <h2>1. Listas Ordenadas (ol)</h2>
+                    
+                    <div class="exemplo-lista">
+                        <h4>Lista Decimal (padrão)</h4>
+                        <ol class="lista-decimal">
+                            <li>Peças de Motor</li>
+                            <li>Sistema de Freios</li>
+                            <li>Suspensão</li>
+                            <li>Sistema Elétrico</li>
+                            <li>Acessórios</li>
+                        </ol>
+                        
+                        <div class="codigo-html">
+&lt;ol class="lista-decimal"&gt;
+    &lt;li&gt;Peças de Motor&lt;/li&gt;
+    &lt;li&gt;Sistema de Freios&lt;/li&gt;
+    &lt;li&gt;Suspensão&lt;/li&gt;
+&lt;/ol&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista Decimal com Zero à Esquerda</h4>
+                        <ol class="lista-decimal-zero">
+                            <li>Análise do Problema</li>
+                            <li>Identificação da Peça</li>
+                            <li>Orçamento</li>
+                            <li>Aprovação</li>
+                            <li>Instalação</li>
+                        </ol>
+                        
+                        <div class="codigo-html">
+&lt;ol style="list-style-type: decimal-leading-zero;"&gt;
+    &lt;li&gt;Análise do Problema&lt;/li&gt;
+    &lt;li&gt;Identificação da Peça&lt;/li&gt;
+&lt;/ol&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista com Numeração Romana Maiúscula</h4>
+                        <ol class="lista-romana-maiuscula">
+                            <li>Fundação da Empresa</li>
+                            <li>Expansão Regional</li>
+                            <li>Certificação ISO</li>
+                            <li>E-commerce</li>
+                        </ol>
+                        
+                        <div class="codigo-html">
+&lt;ol style="list-style-type: upper-roman;"&gt;
+    &lt;li&gt;Fundação da Empresa&lt;/li&gt;
+    &lt;li&gt;Expansão Regional&lt;/li&gt;
+&lt;/ol&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista com Numeração Romana Minúscula</h4>
+                        <ol class="lista-romana-minuscula">
+                            <li>Qualidade</li>
+                            <li>Confiabilidade</li>
+                            <li>Inovação</li>
+                            <li>Sustentabilidade</li>
+                        </ol>
+                        
+                        <div class="codigo-html">
+&lt;ol style="list-style-type: lower-roman;"&gt;
+    &lt;li&gt;Qualidade&lt;/li&gt;
+    &lt;li&gt;Confiabilidade&lt;/li&gt;
+&lt;/ol&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista Alfabética Maiúscula</h4>
+                        <ol class="lista-alfa-maiuscula">
+                            <li>Atendimento Personalizado</li>
+                            <li>Consultoria Técnica</li>
+                            <li>Entrega Rápida</li>
+                            <li>Garantia Estendida</li>
+                        </ol>
+                        
+                        <div class="codigo-html">
+&lt;ol style="list-style-type: upper-alpha;"&gt;
+    &lt;li&gt;Atendimento Personalizado&lt;/li&gt;
+    &lt;li&gt;Consultoria Técnica&lt;/li&gt;
+&lt;/ol&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista Alfabética Minúscula</h4>
+                        <ol class="lista-alfa-minuscula">
+                            <li>análise técnica</li>
+                            <li>busca no estoque</li>
+                            <li>cotação de preços</li>
+                            <li>disponibilidade</li>
+                        </ol>
+                        
+                        <div class="codigo-html">
+&lt;ol style="list-style-type: lower-alpha;"&gt;
+    &lt;li&gt;análise técnica&lt;/li&gt;
+    &lt;li&gt;busca no estoque&lt;/li&gt;
+&lt;/ol&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista com Letras Gregas</h4>
+                        <ol class="lista-grega-minuscula">
+                            <li>Motor</li>
+                            <li>Transmissão</li>
+                            <li>Freios</li>
+                            <li>Suspensão</li>
+                        </ol>
+                        
+                        <div class="codigo-html">
+&lt;ol style="list-style-type: lower-greek;"&gt;
+    &lt;li&gt;Motor&lt;/li&gt;
+    &lt;li&gt;Transmissão&lt;/li&gt;
+&lt;/ol&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listas Não Ordenadas -->
+                <div class="lista-section">
+                    <h2>2. Listas Não Ordenadas (ul)</h2>
+                    
+                    <div class="exemplo-lista">
+                        <h4>Lista com Discos (padrão)</h4>
+                        <ul class="lista-disc">
+                            <li>Filtros de Óleo</li>
+                            <li>Filtros de Ar</li>
+                            <li>Filtros de Combustível</li>
+                            <li>Filtros de Cabine</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+&lt;ul style="list-style-type: disc;"&gt;
+    &lt;li&gt;Filtros de Óleo&lt;/li&gt;
+    &lt;li&gt;Filtros de Ar&lt;/li&gt;
+&lt;/ul&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista com Círculos</h4>
+                        <ul class="lista-circle">
+                            <li>Velas de Ignição</li>
+                            <li>Cabos de Vela</li>
+                            <li>Bobinas de Ignição</li>
+                            <li>Platinado</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+&lt;ul style="list-style-type: circle;"&gt;
+    &lt;li&gt;Velas de Ignição&lt;/li&gt;
+    &lt;li&gt;Cabos de Vela&lt;/li&gt;
+&lt;/ul&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista com Quadrados</h4>
+                        <ul class="lista-square">
+                            <li>Pastilhas de Freio</li>
+                            <li>Discos de Freio</li>
+                            <li>Fluido de Freio</li>
+                            <li>Cilindro Mestre</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+&lt;ul style="list-style-type: square;"&gt;
+    &lt;li&gt;Pastilhas de Freio&lt;/li&gt;
+    &lt;li&gt;Discos de Freio&lt;/li&gt;
+&lt;/ul&gt;
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista sem Marcadores</h4>
+                        <ul class="lista-none">
+                            <li>Amortecedores Dianteiros</li>
+                            <li>Amortecedores Traseiros</li>
+                            <li>Molas Helicoidais</li>
+                            <li>Buchas de Suspensão</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+&lt;ul style="list-style-type: none;"&gt;
+    &lt;li&gt;Amortecedores Dianteiros&lt;/li&gt;
+    &lt;li&gt;Amortecedores Traseiros&lt;/li&gt;
+&lt;/ul&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listas Personalizadas -->
+                <div class="lista-section">
+                    <h2>3. Listas Personalizadas</h2>
+                    
+                    <div class="exemplo-lista">
+                        <h4>Lista com Ícone de Seta</h4>
+                        <ul class="lista-personalizada icone-seta">
+                            <li>Diagnóstico Computadorizado</li>
+                            <li>Análise de Componentes</li>
+                            <li>Teste de Performance</li>
+                            <li>Relatório Técnico</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+.lista-personalizada.icone-seta li::before {
+    content: '▶';
+    color: var(--cor-secundaria);
+    position: absolute;
+    left: 0;
+}
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista com Ícone de Check</h4>
+                        <ul class="lista-personalizada icone-check">
+                            <li>Peças Originais Certificadas</li>
+                            <li>Garantia de Fábrica</li>
+                            <li>Instalação Profissional</li>
+                            <li>Suporte Pós-Venda</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+.lista-personalizada.icone-check li::before {
+    content: '✓';
+    color: #28a745;
+    position: absolute;
+    left: 0;
+}
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista com Ícone de Estrela</h4>
+                        <ul class="lista-personalizada icone-estrela">
+                            <li>Atendimento 5 Estrelas</li>
+                            <li>Produtos Premium</li>
+                            <li>Entrega Expressa</li>
+                            <li>Consultoria Especializada</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+.lista-personalizada.icone-estrela li::before {
+    content: '★';
+    color: var(--cor-destaque);
+    position: absolute;
+    left: 0;
+}
+                        </div>
+                    </div>
+
+                    <div class="exemplo-lista">
+                        <h4>Lista com Ícone de Engrenagem</h4>
+                        <ul class="lista-personalizada icone-engrenagem">
+                            <li>Manutenção Preventiva</li>
+                            <li>Revisão Completa</li>
+                            <li>Troca de Componentes</li>
+                            <li>Ajustes Finos</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+.lista-personalizada.icone-engrenagem li::before {
+    content: '⚙';
+    color: var(--cor-primaria);
+    position: absolute;
+    left: 0;
+}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Definições -->
+                <div class="lista-section">
+                    <h2>4. Lista de Definições (dl)</h2>
+                    
+                    <div class="exemplo-lista">
+                        <dl class="lista-definicoes">
+                            <dt>Pastilha de Freio</dt>
+                            <dd>Componente do sistema de freios responsável por criar atrito com o disco, convertendo energia cinética em calor para desacelerar o veículo.</dd>
+                            
+                            <dt>Amortecedor</dt>
+                            <dd>Dispositivo hidráulico que controla o movimento das molas da suspensão, proporcionando estabilidade e conforto ao veículo.</dd>
+                            
+                            <dt>Filtro de Óleo</dt>
+                            <dd>Elemento filtrante que remove impurezas do óleo lubrificante do motor, mantendo-o limpo e protegendo os componentes internos.</dd>
+                            
+                            <dt>Vela de Ignição</dt>
+                            <dd>Componente elétrico que produz a faísca necessária para iniciar a combustão da mistura ar-combustível no cilindro do motor.</dd>
+                        </dl>
+                        
+                        <div class="codigo-html">
+&lt;dl&gt;
+    &lt;dt&gt;Pastilha de Freio&lt;/dt&gt;
+    &lt;dd&gt;Componente do sistema de freios...&lt;/dd&gt;
+    
+    &lt;dt&gt;Amortecedor&lt;/dt&gt;
+    &lt;dd&gt;Dispositivo hidráulico...&lt;/dd&gt;
+&lt;/dl&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista Aninhada -->
+                <div class="lista-section">
+                    <h2>5. Listas Aninhadas</h2>
+                    
+                    <div class="exemplo-lista">
+                        <div class="lista-aninhada">
+                            <h4>Categorias de Produtos</h4>
+                            <ul>
+                                <li>Sistema de Motor
+                                    <ul>
+                                        <li>Filtros
+                                            <ul>
+                                                <li>Filtro de Óleo</li>
+                                                <li>Filtro de Ar</li>
+                                                <li>Filtro de Combustível</li>
+                                            </ul>
+                                        </li>
+                                        <li>Ignição
+                                            <ul>
+                                                <li>Velas de Ignição</li>
+                                                <li>Cabos de Vela</li>
+                                                <li>Bobinas</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>Sistema de Freios
+                                    <ul>
+                                        <li>Discos e Pastilhas</li>
+                                        <li>Fluidos</li>
+                                        <li>Componentes Hidráulicos</li>
+                                    </ul>
+                                </li>
+                                <li>Suspensão
+                                    <ul>
+                                        <li>Amortecedores</li>
+                                        <li>Molas</li>
+                                        <li>Buchas</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="codigo-html">
+&lt;ul&gt;
+    &lt;li&gt;Sistema de Motor
+        &lt;ul&gt;
+            &lt;li&gt;Filtros
+                &lt;ul&gt;
+                    &lt;li&gt;Filtro de Óleo&lt;/li&gt;
+                    &lt;li&gt;Filtro de Ar&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista Horizontal -->
+                <div class="lista-section">
+                    <h2>6. Lista Horizontal</h2>
+                    
+                    <div class="exemplo-lista">
+                        <h4>Marcas Parceiras</h4>
+                        <ul class="lista-horizontal">
+                            <li>Bosch</li>
+                            <li>Monroe</li>
+                            <li>NGK</li>
+                            <li>Cofap</li>
+                            <li>Gates</li>
+                            <li>Dayco</li>
+                            <li>TRW</li>
+                            <li>Nakata</li>
+                        </ul>
+                        
+                        <div class="codigo-html">
+.lista-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+}
+
+.lista-horizontal li {
+    background: var(--cor-secundaria);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista com Numeração Personalizada -->
+                <div class="lista-section">
+                    <h2>7. Lista com Numeração Personalizada</h2>
+                    
+                    <div class="exemplo-lista">
+                        <h4>Processo de Atendimento</h4>
+                        <ol class="lista-numeracao-personalizada">
+                            <li>Cliente entra em contato via telefone, e-mail ou presencialmente</li>
+                            <li>Identificação da necessidade e especificação da peça</li>
+                            <li>Consulta ao estoque e verificação de disponibilidade</li>
+                            <li>Elaboração de orçamento detalhado com preços e prazos</li>
+                            <li>Aprovação do cliente e confirmação do pedido</li>
+                            <li>Separação da mercadoria e preparação para entrega</li>
+                            <li>Entrega ou retirada da peça pelo cliente</li>
+                            <li>Acompanhamento pós-venda e suporte técnico</li>
+                        </ol>
+                        
+                        <div class="codigo-html">
+.lista-numeracao-personalizada {
+    counter-reset: custom-counter;
+    list-style: none;
+}
+
+.lista-numeracao-personalizada li::before {
+    content: counter(custom-counter);
+    background: var(--cor-secundaria);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 (11) 98765-4321</p>
+                    <p>✉️ contato@hardautopecas.com.br</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Rua das Autopeças, 1234</p>
+                    <p>Vila Industrial - São Paulo/SP</p>
+                    <p>CEP: 01234-567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 18h</p>
+                    <p>Sábado: 8h às 12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hard Auto Peças. Todos os direitos reservados.</p>
+                <p>Desenvolvido por: Grupo 1 - Programação Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="voltar-topo" id="voltarTopo">↑</a>
+
+    <script>
+        // Botão voltar ao topo
+        const voltarTopo = document.getElementById('voltarTopo');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                voltarTopo.classList.add('show');
+            } else {
+                voltarTopo.classList.remove('show');
+            }
+        });
+
+        voltarTopo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animação de entrada das seções
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.lista-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

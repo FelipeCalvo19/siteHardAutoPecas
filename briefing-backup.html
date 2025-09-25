@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing - Hard Auto Peças</title>
+    <meta name="description" content="Briefing completo da Hard Auto Peças com informações detalhadas sobre a empresa, produtos e serviços.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E50914'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>H</text></svg>">
+    <style>
+        body {
+            background: linear-gradient(45deg, #f8f8f8 25%, #e8e8e8 25%, #e8e8e8 50%, #f8f8f8 50%, #f8f8f8 75%, #e8e8e8 75%);
+            background-size: 40px 40px;
+        }
+        
+        .briefing-container {
+            background: white;
+            margin: 2rem auto;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 900px;
+        }
+        
+        .questao {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255,107,0,0.03), rgba(255,204,0,0.03));
+            border-radius: 10px;
+            border-left: 5px solid var(--cor-secundaria);
+            transition: all 0.3s ease;
+        }
+        
+        .questao:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255,107,0,0.1);
+        }
+        
+        .questao h3 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .questao .pergunta {
+            font-weight: 600;
+            color: var(--cor-secundaria);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .questao .resposta {
+            color: #444;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        
+        .questao .resposta ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .questao .resposta li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .destaque {
+            background: linear-gradient(135deg, rgba(255,204,0,0.2), rgba(255,107,0,0.1));
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 3px solid var(--cor-destaque);
+        }
+        
+        .numero-questao {
+            display: inline-block;
+            background: var(--cor-secundaria);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">HARD AUTO PEÇAS</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Briefing da Empresa</h1>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 3rem;">
+                    Conheça todos os detalhes sobre a Hard Auto Peças através deste briefing completo com informações estratégicas sobre nossa empresa.
+                </p>
+
+                <div class="briefing-container">
+                    <!-- Questão 1 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">1</span>Qual é o nome da empresa?</h3>
+                        <div class="pergunta">Nome completo e razão social da empresa</div>
+                        <div class="resposta">
+                            <strong>Nome Fantasia:</strong> Hard Auto Peças<br>
+                            <strong>Razão Social:</strong> Hard Auto Peças Ltda.<br>
+                            <strong>CNPJ:</strong> 12.345.678/0001-90<br>
+                            <div class="destaque">
+                                A marca "Hard Auto Peças" foi escolhida para transmitir resistência, durabilidade e confiabilidade - características essenciais no mercado automotivo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Questão 2 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">2</span>Qual é o ramo de atividade da empresa?</h3>
+                        <div class="pergunta">Setor de atuação e principais atividades</div>
+                        <div class="resposta">
+                            <strong>Setor:</strong> Comércio de Autopeças e Acessórios Automotivos<br>
+                            <strong>Atividades Principais:</strong>
+                            <ul>
+                                <li>Venda de peças automotivas nacionais e importadas</li>
+                                <li>Distribuição de acessórios para veículos</li>
+                                <li>Consultoria técnica especializada</li>
+                                <li>Atendimento a oficinas, revendedores e consumidores finais</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Questão 3 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">3</span>Quando a empresa foi fundada?</h3>
+                        <div class="pergunta">Data de fundação e marcos históricos</div>
+                        <div class="resposta">
+                            <strong>Data de Fundação:</strong> 15 de março de 2003<br>
+                            <strong>Tempo de Mercado:</strong> Mais de 20 anos de experiência<br>
+                            <div class="destaque">
+                                Fundada por João Silva, a empresa nasceu do sonho de oferecer peças automotivas de qualidade superior com atendimento diferenciado no mercado brasileiro.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Questão 4 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">4</span>Quem são os fundadores/proprietários?</h3>
+                        <div class="pergunta">Informações sobre a liderança da empresa</div>
+                        <div class="resposta">
+                            <strong>Fundador e Diretor Geral:</strong> João Silva<br>
+                            <strong>Experiência:</strong> Mais de 30 anos no setor automotivo<br>
+                            <strong>Formação:</strong> Técnico em Mecânica Automotiva e Administração de Empresas<br>
+                            <strong>Sócios:</strong> Maria Santos (Gerente Comercial) e Carlos Oliveira (Supervisor Técnico)
+                        </div>
+                    </div>
+
+                    <!-- Questão 5 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">5</span>Qual é a localização da empresa?</h3>
+                        <div class="pergunta">Endereço completo e informações de localização</div>
+                        <div class="resposta">
+                            <strong>Endereço:</strong> Rua das Autopeças, 1234 - Vila Industrial<br>
+                            <strong>Cidade:</strong> São Paulo - SP<br>
+                            <strong>CEP:</strong> 01234-567<br>
+                            <strong>Região:</strong> Zona Oeste de São Paulo<br>
+                            <div class="destaque">
+                                Localização estratégica com fácil acesso às principais rodovias e próximo ao centro de distribuição automotiva da cidade.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Questão 6 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">6</span>Qual é o público-alvo da empresa?</h3>
+                        <div class="pergunta">Perfil dos clientes e segmentação de mercado</div>
+                        <div class="resposta">
+                            <strong>Público Primário:</strong>
+                            <ul>
+                                <li>Oficinas mecânicas e auto centers</li>
+                                <li>Revendedores de autopeças</li>
+                                <li>Mecânicos autônomos</li>
+                            </ul>
+                            <strong>Público Secundário:</strong>
+                            <ul>
+                                <li>Proprietários de veículos (consumidor final)</li>
+                                <li>Empresas com frotas de veículos</li>
+                                <li>Entusiastas automotivos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Questão 7 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">7</span>Quais são os principais produtos/serviços?</h3>
+                        <div class="pergunta">Catálogo de produtos e serviços oferecidos</div>
+                        <div class="resposta">
+                            <strong>Produtos:</strong>
+                            <ul>
+                                <li>Peças de motor (pistões, anéis, válvulas, filtros)</li>
+                                <li>Sistema de freios (discos, pastilhas, fluidos)</li>
+                                <li>Suspensão (amortecedores, molas, buchas)</li>
+                                <li>Sistema elétrico (baterias, alternadores, velas)</li>
+                                <li>Acessórios diversos (óleos, pneus, ferramentas)</li>
+                            </ul>
+                            <strong>Serviços:</strong>
+                            <ul>
+                                <li>Consultoria técnica especializada</li>
+                                <li>Identificação de peças por chassi</li>
+                                <li>Orçamentos personalizados</li>
+                                <li>Entrega expressa</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Questão 8 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">8</span>Quais são os principais concorrentes?</h3>
+                        <div class="pergunta">Análise do mercado concorrencial</div>
+                        <div class="resposta">
+                            <strong>Concorrentes Diretos:</strong>
+                            <ul>
+                                <li>Grandes redes de autopeças (Nakata, TRW, Bosch)</li>
+                                <li>Distribuidores regionais</li>
+                                <li>Lojas especializadas locais</li>
+                            </ul>
+                            <strong>Diferenciais Competitivos:</strong>
+                            <ul>
+                                <li>Atendimento personalizado e consultoria técnica</li>
+                                <li>Mix de produtos nacionais e importados</li>
+                                <li>Preços competitivos com qualidade garantida</li>
+                                <li>Relacionamento próximo com clientes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Questão 9 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">9</span>Qual é a missão da empresa?</h3>
+                        <div class="pergunta">Propósito e razão de existir da empresa</div>
+                        <div class="resposta">
+                            <div class="destaque">
+                                "Fornecer peças e acessórios automotivos de alta qualidade, contribuindo para a segurança e performance dos veículos de nossos clientes, através de atendimento especializado e soluções personalizadas."
+                            </div>
+                            Nossa missão reflete nosso compromisso com a excelência, segurança e satisfação do cliente, sempre buscando superar expectativas.
+                        </div>
+                    </div>
+
+                    <!-- Questão 10 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">10</span>Qual é a visão da empresa?</h3>
+                        <div class="pergunta">Objetivos futuros e aspirações da empresa</div>
+                        <div class="resposta">
+                            <div class="destaque">
+                                "Ser reconhecida como a principal referência em peças automotivas no Brasil, expandindo nossa presença nacional e mantendo os mais altos padrões de qualidade e atendimento."
+                            </div>
+                            Vislumbramos um futuro onde a Hard Auto Peças seja sinônimo de confiabilidade, inovação e excelência no setor automotivo.
+                        </div>
+                    </div>
+
+                    <!-- Questão 11 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">11</span>Quais são os valores da empresa?</h3>
+                        <div class="pergunta">Princípios e valores que norteiam a empresa</div>
+                        <div class="resposta">
+                            <strong>Nossos Valores Fundamentais:</strong>
+                            <ul>
+                                <li><strong>Qualidade:</strong> Produtos que atendem aos mais rigorosos padrões internacionais</li>
+                                <li><strong>Confiabilidade:</strong> Relacionamentos baseados na confiança e transparência</li>
+                                <li><strong>Inovação:</strong> Busca constante por tecnologias e soluções modernas</li>
+                                <li><strong>Sustentabilidade:</strong> Práticas ambientalmente responsáveis</li>
+                                <li><strong>Excelência:</strong> Superação de expectativas em todos os processos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Questão 12 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">12</span>Qual é o diferencial competitivo?</h3>
+                        <div class="pergunta">O que torna a empresa única no mercado</div>
+                        <div class="resposta">
+                            <strong>Principais Diferenciais:</strong>
+                            <ul>
+                                <li><strong>Expertise Técnica:</strong> Equipe especializada com mais de 20 anos de experiência</li>
+                                <li><strong>Mix Único:</strong> Combinação de peças nacionais e importadas de primeira linha</li>
+                                <li><strong>Atendimento Personalizado:</strong> Consultoria técnica e soluções customizadas</li>
+                                <li><strong>Logística Eficiente:</strong> Entrega rápida em todo o território nacional</li>
+                                <li><strong>Relacionamento:</strong> Parceria de longo prazo com clientes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Questão 13 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">13</span>Quantos funcionários a empresa possui?</h3>
+                        <div class="pergunta">Estrutura organizacional e recursos humanos</div>
+                        <div class="resposta">
+                            <strong>Total de Colaboradores:</strong> 52 funcionários<br>
+                            <strong>Distribuição por Área:</strong>
+                            <ul>
+                                <li>Vendas e Atendimento: 18 pessoas</li>
+                                <li>Técnico e Consultoria: 12 pessoas</li>
+                                <li>Logística e Estoque: 15 pessoas</li>
+                                <li>Administrativo: 7 pessoas</li>
+                            </ul>
+                            <div class="destaque">
+                                Equipe altamente qualificada com programas contínuos de treinamento e desenvolvimento profissional.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Questão 14 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">14</span>Qual é o faturamento anual aproximado?</h3>
+                        <div class="pergunta">Informações financeiras e crescimento</div>
+                        <div class="resposta">
+                            <strong>Faturamento Anual:</strong> R$ 25 milhões (2024)<br>
+                            <strong>Crescimento:</strong> 15% ao ano nos últimos 5 anos<br>
+                            <strong>Projeção 2025:</strong> R$ 28 milhões<br>
+                            <div class="destaque">
+                                Crescimento consistente baseado na expansão de mercado e fidelização de clientes, com investimentos contínuos em estoque e tecnologia.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Questão 15 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">15</span>Quais são os canais de distribuição?</h3>
+                        <div class="pergunta">Como os produtos chegam aos clientes</div>
+                        <div class="resposta">
+                            <strong>Canais de Venda:</strong>
+                            <ul>
+                                <li><strong>Loja Física:</strong> Atendimento presencial na matriz em São Paulo</li>
+                                <li><strong>E-commerce:</strong> Plataforma online com entrega nacional</li>
+                                <li><strong>Vendas B2B:</strong> Atendimento direto a oficinas e revendedores</li>
+                                <li><strong>Representantes:</strong> Equipe de vendas externa</li>
+                                <li><strong>Televendas:</strong> Central de atendimento especializada</li>
+                            </ul>
+                            <strong>Cobertura:</strong> Todo o território nacional com foco na região Sudeste
+                        </div>
+                    </div>
+
+                    <!-- Questão 16 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">16</span>Quais são os planos de expansão?</h3>
+                        <div class="pergunta">Estratégias de crescimento e expansão</div>
+                        <div class="resposta">
+                            <strong>Planos de Curto Prazo (2025-2026):</strong>
+                            <ul>
+                                <li>Abertura de filial no Rio de Janeiro</li>
+                                <li>Expansão do e-commerce com marketplace</li>
+                                <li>Ampliação do centro de distribuição</li>
+                            </ul>
+                            <strong>Planos de Médio Prazo (2027-2030):</strong>
+                            <ul>
+                                <li>Presença em todas as capitais brasileiras</li>
+                                <li>Desenvolvimento de marca própria</li>
+                                <li>Investimento em peças para veículos elétricos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Questão 17 -->
+                    <div class="questao">
+                        <h3><span class="numero-questao">17</span>Como a empresa se posiciona no mercado?</h3>
+                        <div class="pergunta">Posicionamento estratégico e imagem de marca</div>
+                        <div class="resposta">
+                            <strong>Posicionamento:</strong> "Especialista em soluções automotivas de qualidade"<br>
+                            <strong>Imagem de Marca:</strong>
+                            <ul>
+                                <li>Confiabilidade e tradição no mercado</li>
+                                <li>Expertise técnica reconhecida</li>
+                                <li>Parceiro estratégico de oficinas e mecânicos</li>
+                                <li>Qualidade superior com preços justos</li>
+                            </ul>
+                            <div class="destaque">
+                                Nos posicionamos como a escolha inteligente para profissionais que buscam qualidade, confiabilidade e suporte técnico especializado no mercado de autopeças.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 (11) 98765-4321</p>
+                    <p>✉️ contato@hardautopecas.com.br</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Rua das Autopeças, 1234</p>
+                    <p>Vila Industrial - São Paulo/SP</p>
+                    <p>CEP: 01234-567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 18h</p>
+                    <p>Sábado: 8h às 12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hard Auto Peças. Todos os direitos reservados.</p>
+                <p>Desenvolvido por: Grupo 1 - Programação Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="voltar-topo" id="voltarTopo">↑</a>
+
+    <script>
+        // Botão voltar ao topo
+        const voltarTopo = document.getElementById('voltarTopo');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                voltarTopo.classList.add('show');
+            } else {
+                voltarTopo.classList.remove('show');
+            }
+        });
+
+        voltarTopo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animação de entrada das questões
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.questao').forEach(questao => {
+            questao.style.opacity = '0';
+            questao.style.transform = 'translateY(30px)';
+            questao.style.transition = 'all 0.6s ease';
+            observer.observe(questao);
+        });
+    </script>
+</body>
+</html>

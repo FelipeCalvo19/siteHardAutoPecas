@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Hard Auto Peças</title>
+    <meta name="description" content="Catálogo completo de peças e acessórios automotivos da Hard Auto Peças. Peças nacionais e importadas com qualidade garantida.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E50914'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>H</text></svg>">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        }
+        
+        .filtros {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .filtros button {
+            background: linear-gradient(45deg, var(--cor-secundaria), #ff8533);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filtros button:hover,
+        .filtros button.active {
+            background: linear-gradient(45deg, var(--cor-primaria), #2a2a2a);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .produto-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .produto-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .produto-item.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+        
+        .produto-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .produto-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .produto-info {
+            padding: 1.5rem;
+        }
+        
+        .produto-info h3 {
+            font-family: var(--fonte-titulos);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--cor-primaria);
+        }
+        
+        .produto-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .produto-categoria {
+            display: inline-block;
+            background: var(--cor-destaque);
+            color: var(--cor-primaria);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .produto-preco {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--cor-secundaria);
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .galeria {
+                grid-template-columns: 1fr;
+            }
+            
+            .filtros button {
+                margin: 5px;
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .galeria {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">HARD AUTO PEÇAS</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Nossos Produtos</h1>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 2rem;">
+                    Explore nosso catálogo completo de peças e acessórios automotivos. Trabalhamos com as melhores marcas do mercado, oferecendo produtos nacionais e importados com garantia de qualidade.
+                </p>
+                
+                <div class="filtros">
+                    <button class="filtro-btn active" data-categoria="todos">Todos os Produtos</button>
+                    <button class="filtro-btn" data-categoria="motor">Motor</button>
+                    <button class="filtro-btn" data-categoria="freios">Freios</button>
+                    <button class="filtro-btn" data-categoria="suspensao">Suspensão</button>
+                    <button class="filtro-btn" data-categoria="eletrica">Elétrica</button>
+                    <button class="filtro-btn" data-categoria="acessorios">Acessórios</button>
+                </div>
+
+                <div class="galeria">
+                    <!-- Produtos de Motor -->
+                    <div class="produto-item" data-categoria="motor">
+                        <img src="images/nCLiDUaepuyG.webp" alt="Kit de Pistões">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Motor</span>
+                            <h3>Kit de Pistões</h3>
+                            <p>Kit completo de pistões para motores 1.0 a 2.0. Fabricação nacional com qualidade internacional.</p>
+                            <div class="produto-preco">R$ 450,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="motor">
+                        <img src="images/V9LvZt9mqI1p.jpg" alt="Componentes do Motor">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Motor</span>
+                            <h3>Componentes do Motor</h3>
+                            <p>Peças diversas para motor: válvulas, anéis, bronzinas e muito mais.</p>
+                            <div class="produto-preco">R$ 280,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="motor">
+                        <img src="images/yshHxKdQebtB.jpg" alt="Turbo Compressor">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Motor</span>
+                            <h3>Turbo Compressor</h3>
+                            <p>Turbo compressor para motores turbo. Aumenta a potência e performance do veículo.</p>
+                            <div class="produto-preco">R$ 1.850,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="motor">
+                        <img src="images/u7LSfdyjBozB.jpg" alt="Kit Motor Completo">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Motor</span>
+                            <h3>Kit Motor Completo</h3>
+                            <p>Kit completo para revisão de motor com todas as peças necessárias.</p>
+                            <div class="produto-preco">R$ 2.200,00</div>
+                        </div>
+                    </div>
+
+                    <!-- Produtos de Freios -->
+                    <div class="produto-item" data-categoria="freios">
+                        <img src="images/u5Es6oBxTjBd.jpg" alt="Sistema de Freios">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Freios</span>
+                            <h3>Sistema de Freios</h3>
+                            <p>Sistema completo de freios com discos, pastilhas e componentes hidráulicos.</p>
+                            <div class="produto-preco">R$ 680,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="freios">
+                        <img src="images/bOeN7xtmUnM1.jpg" alt="Discos de Freio">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Freios</span>
+                            <h3>Discos de Freio</h3>
+                            <p>Discos de freio ventilados e perfurados para melhor performance de frenagem.</p>
+                            <div class="produto-preco">R$ 320,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="freios">
+                        <img src="images/nGdB4Efskf5V.jpg" alt="Discos Perfurados">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Freios</span>
+                            <h3>Discos Perfurados</h3>
+                            <p>Discos de freio perfurados para alta performance e melhor dissipação de calor.</p>
+                            <div class="produto-preco">R$ 480,00</div>
+                        </div>
+                    </div>
+
+                    <!-- Produtos de Suspensão -->
+                    <div class="produto-item" data-categoria="suspensao">
+                        <img src="images/QjjeDoOZ5qtW.jpg" alt="Kit Suspensão">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Suspensão</span>
+                            <h3>Kit Suspensão</h3>
+                            <p>Kit completo de suspensão com amortecedores, molas e buchas.</p>
+                            <div class="produto-preco">R$ 890,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="suspensao">
+                        <img src="images/SjhLvr8ULlS0.jpg" alt="Componentes Suspensão">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Suspensão</span>
+                            <h3>Componentes Suspensão</h3>
+                            <p>Peças individuais para sistema de suspensão: buchas, batentes, coifas.</p>
+                            <div class="produto-preco">R$ 150,00</div>
+                        </div>
+                    </div>
+
+                    <!-- Produtos Elétricos -->
+                    <div class="produto-item" data-categoria="eletrica">
+                        <img src="images/GSwnU1bYP0O4.jpg" alt="Sistema Elétrico">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Elétrica</span>
+                            <h3>Sistema Elétrico</h3>
+                            <p>Componentes elétricos: alternador, motor de partida, bateria e acessórios.</p>
+                            <div class="produto-preco">R$ 420,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="eletrica">
+                        <img src="images/pOoR6iqSnOF9.webp" alt="Peças Elétricas Toyota">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Elétrica</span>
+                            <h3>Peças Elétricas Toyota</h3>
+                            <p>Peças elétricas específicas para veículos Toyota. Qualidade original.</p>
+                            <div class="produto-preco">R$ 380,00</div>
+                        </div>
+                    </div>
+
+                    <!-- Acessórios -->
+                    <div class="produto-item" data-categoria="acessorios">
+                        <img src="images/sqprA0sYfcpk.webp" alt="Acessórios Diversos">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Acessórios</span>
+                            <h3>Acessórios Diversos</h3>
+                            <p>Linha completa de acessórios automotivos para personalização e funcionalidade.</p>
+                            <div class="produto-preco">R$ 120,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="acessorios">
+                        <img src="images/N4kh4MmNHUim.jpg" alt="Peças Usadas">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Acessórios</span>
+                            <h3>Peças Seminovas</h3>
+                            <p>Peças seminovas revisadas com garantia. Opção econômica e sustentável.</p>
+                            <div class="produto-preco">R$ 80,00</div>
+                        </div>
+                    </div>
+
+                    <!-- Produtos adicionais para completar 25+ -->
+                    <div class="produto-item" data-categoria="motor">
+                        <img src="images/jMPCluVFjmJs.png" alt="Peças Tigrão">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Motor</span>
+                            <h3>Filtros de Motor</h3>
+                            <p>Filtros de óleo, ar e combustível para diversos modelos de veículos.</p>
+                            <div class="produto-preco">R$ 65,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="acessorios">
+                        <img src="images/hgKIDFKH5uP0.jpg" alt="Produtos NAPA">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Acessórios</span>
+                            <h3>Linha NAPA</h3>
+                            <p>Produtos da linha NAPA com qualidade internacional e garantia estendida.</p>
+                            <div class="produto-preco">R$ 290,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="acessorios">
+                        <img src="images/pTbgOzPXeyjw.png" alt="Auto Store">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Acessórios</span>
+                            <h3>Ferramentas</h3>
+                            <p>Ferramentas profissionais para oficinas e mecânicos automotivos.</p>
+                            <div class="produto-preco">R$ 180,00</div>
+                        </div>
+                    </div>
+
+                    <!-- Produtos extras para garantir 25+ itens -->
+                    <div class="produto-item" data-categoria="motor">
+                        <img src="images/nCLiDUaepuyG.webp" alt="Velas de Ignição">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Motor</span>
+                            <h3>Velas de Ignição</h3>
+                            <p>Velas de ignição NGK e Bosch para todos os tipos de motores.</p>
+                            <div class="produto-preco">R$ 35,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="freios">
+                        <img src="images/u5Es6oBxTjBd.jpg" alt="Pastilhas de Freio">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Freios</span>
+                            <h3>Pastilhas de Freio</h3>
+                            <p>Pastilhas de freio cerâmicas e semi-metálicas para diversos veículos.</p>
+                            <div class="produto-preco">R$ 120,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="suspensao">
+                        <img src="images/QjjeDoOZ5qtW.jpg" alt="Amortecedores">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Suspensão</span>
+                            <h3>Amortecedores</h3>
+                            <p>Amortecedores Monroe e Cofap com tecnologia de ponta.</p>
+                            <div class="produto-preco">R$ 240,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="eletrica">
+                        <img src="images/GSwnU1bYP0O4.jpg" alt="Bateria">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Elétrica</span>
+                            <h3>Bateria Automotiva</h3>
+                            <p>Baterias de 45Ah a 100Ah com garantia de 18 meses.</p>
+                            <div class="produto-preco">R$ 350,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="acessorios">
+                        <img src="images/hgKIDFKH5uP0.jpg" alt="Óleos Lubrificantes">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Acessórios</span>
+                            <h3>Óleos Lubrificantes</h3>
+                            <p>Óleos sintéticos e semi-sintéticos das melhores marcas.</p>
+                            <div class="produto-preco">R$ 85,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="motor">
+                        <img src="images/yshHxKdQebtB.jpg" alt="Correia Dentada">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Motor</span>
+                            <h3>Correia Dentada</h3>
+                            <p>Correias dentadas Gates e Dayco para diversos modelos.</p>
+                            <div class="produto-preco">R$ 95,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="freios">
+                        <img src="images/bOeN7xtmUnM1.jpg" alt="Fluido de Freio">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Freios</span>
+                            <h3>Fluido de Freio</h3>
+                            <p>Fluido de freio DOT 3 e DOT 4 para sistemas hidráulicos.</p>
+                            <div class="produto-preco">R$ 25,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="suspensao">
+                        <img src="images/SjhLvr8ULlS0.jpg" alt="Molas">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Suspensão</span>
+                            <h3>Molas Helicoidais</h3>
+                            <p>Molas helicoidais para suspensão dianteira e traseira.</p>
+                            <div class="produto-preco">R$ 180,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="eletrica">
+                        <img src="images/pOoR6iqSnOF9.webp" alt="Alternador">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Elétrica</span>
+                            <h3>Alternador</h3>
+                            <p>Alternadores remanufaturados com garantia de 6 meses.</p>
+                            <div class="produto-preco">R$ 420,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="acessorios">
+                        <img src="https://sdmntprnorthcentralus.oaiusercontent.com/files/e5853c071bb6088_00000000-99c8-622f-8dff-b5c42ab4ef4c/drvs/wm/raw?se=2025-09-24T19%3A56%3A27Z&sp=r&sv=2024-08-04&sr=b&scid=79cb50e2-8aec-5f3a-9a17-a30db24d40df&skoid=ec8eb293-a61a-47e0-abd0-6051cc94b050&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-24T11%3A46%3A49Z&ske=2025-09-25T11%3A46%3A49Z&sks=b&skv=2024-08-04&sig=oAN6hOPN/6zjEB/PcWW8cCZoAnKfKdQgYB50Gc2tUH4%3D" alt="Pneus">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Acessórios</span>
+                            <h3>Pneus</h3>
+                            <p>Pneus de diversas marcas e medidas para carros e caminhões.</p>
+                            <div class="produto-preco">R$ 280,00</div>
+                        </div>
+                    </div>
+
+                    <div class="produto-item" data-categoria="motor">
+                        <img src="images/V9LvZt9mqI1p.jpg" alt="Bomba d'Água">
+                        <div class="produto-info">
+                            <span class="produto-categoria">Motor</span>
+                            <h3>Bomba d'Água</h3>
+                            <p>Bombas d'água para sistema de arrefecimento do motor.</p>
+                            <div class="produto-preco">R$ 160,00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 (11) 98765-4321</p>
+                    <p>✉️ contato@hardautopecas.com.br</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Rua das Autopeças, 1234</p>
+                    <p>Vila Industrial - São Paulo/SP</p>
+                    <p>CEP: 01234-567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 18h</p>
+                    <p>Sábado: 8h às 12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hard Auto Peças. Todos os direitos reservados.</p>
+                <p>Desenvolvido por: Grupo 1 - Programação Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="voltar-topo" id="voltarTopo">↑</a>
+
+    <script>
+        // Sistema de filtros
+        const filtros = document.querySelectorAll('.filtro-btn');
+        const produtos = document.querySelectorAll('.produto-item');
+
+        filtros.forEach(filtro => {
+            filtro.addEventListener('click', () => {
+                // Remove active de todos os filtros
+                filtros.forEach(f => f.classList.remove('active'));
+                // Adiciona active ao filtro clicado
+                filtro.classList.add('active');
+
+                const categoria = filtro.getAttribute('data-categoria');
+
+                produtos.forEach(produto => {
+                    if (categoria === 'todos' || produto.getAttribute('data-categoria') === categoria) {
+                        produto.classList.remove('hidden');
+                    } else {
+                        produto.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Botão voltar ao topo
+        const voltarTopo = document.getElementById('voltarTopo');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                voltarTopo.classList.add('show');
+            } else {
+                voltarTopo.classList.remove('show');
+            }
+        });
+
+        voltarTopo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animação de entrada dos produtos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        produtos.forEach(produto => {
+            produto.style.opacity = '0';
+            produto.style.transform = 'translateY(30px)';
+            produto.style.transition = 'all 0.6s ease';
+            observer.observe(produto);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos - Hard Auto Peças</title>
+    <meta name="description" content="Central de documentos da Hard Auto Peças - catálogos, manuais, certificados e documentação técnica.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E50914'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>H</text></svg>">
+    <style>
+        body {
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255,107,0,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255,204,0,0.05) 0%, transparent 50%),
+                linear-gradient(45deg, #f8f8f8 25%, transparent 25%),
+                linear-gradient(-45deg, #f8f8f8 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px, 20px 20px, 20px 20px;
+            background-position: 0 0, 50px 50px, 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        
+        .documentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .categoria-documentos {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--cor-secundaria);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .categoria-documentos::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(255,107,0,0.1), rgba(255,204,0,0.05));
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+        
+        .categoria-documentos:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .categoria-documentos h2 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .categoria-documentos h2::before {
+            margin-right: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .categoria-documentos.catalogos h2::before { content: '📚'; }
+        .categoria-documentos.manuais h2::before { content: '📖'; }
+        .categoria-documentos.certificados h2::before { content: '🏆'; }
+        .categoria-documentos.formularios h2::before { content: '📋'; }
+        
+        .documento-item {
+            background: linear-gradient(135deg, rgba(255,107,0,0.05), rgba(255,204,0,0.05));
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--cor-secundaria);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .documento-item:hover {
+            background: linear-gradient(135deg, rgba(255,107,0,0.1), rgba(255,204,0,0.1));
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255,107,0,0.2);
+        }
+        
+        .documento-item::after {
+            content: '📄';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        
+        .documento-item:hover::after {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        
+        .documento-titulo {
+            font-family: var(--fonte-titulos);
+            font-size: 1.1rem;
+            color: var(--cor-primaria);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .documento-descricao {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+        }
+        
+        .documento-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .documento-tamanho {
+            background: #f8f9fa;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        
+        .documento-data {
+            font-style: italic;
+        }
+        
+        .documento-tipo {
+            background: var(--cor-secundaria);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+        
+        .aviso-documentos {
+            background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,107,0,0.05));
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--cor-destaque);
+            text-align: center;
+        }
+        
+        .aviso-documentos h3 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 1rem;
+        }
+        
+        .aviso-documentos p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .estatisticas-docs {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .estatisticas-docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .estatistica-doc-item {
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(255,107,0,0.05), rgba(255,204,0,0.05));
+            border-radius: 10px;
+        }
+        
+        .estatistica-doc-numero {
+            font-family: var(--fonte-titulos);
+            font-size: 2rem;
+            color: var(--cor-secundaria);
+            font-weight: 700;
+        }
+        
+        .estatistica-doc-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .busca-documentos {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .busca-documentos label {
+            font-weight: 600;
+            color: var(--cor-primaria);
+        }
+        
+        .busca-documentos input,
+        .busca-documentos select {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .busca-documentos input:focus,
+        .busca-documentos select:focus {
+            outline: none;
+            border-color: var(--cor-secundaria);
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, var(--cor-secundaria), #e55a00);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-download:hover {
+            background: linear-gradient(135deg, #e55a00, var(--cor-secundaria));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,107,0,0.3);
+        }
+        
+        .modal-documento {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--cor-secundaria);
+        }
+        
+        @media (max-width: 768px) {
+            .documentos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categoria-documentos {
+                padding: 2rem;
+            }
+            
+            .busca-documentos {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .busca-documentos input,
+            .busca-documentos select {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">HARD</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="briefing.html">Briefing</a></li>
+                        <li><a href="listas.html">Listas</a></li>
+                        <li><a href="links.html">Links</a></li>
+                        <li><a href="tabela.html">Tabela</a></li>
+                        <li><a href="wireframes.html">Wireframes</a></li>
+                        <li><a href="manual-marca.html">Manual</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Central de Documentos</h1>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 2rem;">
+                    Acesse nossa biblioteca completa de documentos técnicos, catálogos, manuais e certificações.
+                </p>
+
+                <div class="aviso-documentos">
+                    <h3>📋 Informações Importantes</h3>
+                    <p>Todos os documentos estão em formato PDF e podem ser visualizados ou baixados. Para acessar alguns documentos técnicos específicos, pode ser necessário cadastro prévio.</p>
+                </div>
+
+                <div class="estatisticas-docs">
+                    <h2 class="section-title" style="margin-bottom: 1rem;">Estatísticas da Biblioteca</h2>
+                    <div class="estatisticas-docs-grid">
+                        <div class="estatistica-doc-item">
+                            <div class="estatistica-doc-numero">24</div>
+                            <div class="estatistica-doc-label">Documentos Totais</div>
+                        </div>
+                        <div class="estatistica-doc-item">
+                            <div class="estatistica-doc-numero">4</div>
+                            <div class="estatistica-doc-label">Categorias</div>
+                        </div>
+                        <div class="estatistica-doc-item">
+                            <div class="estatistica-doc-numero">156</div>
+                            <div class="estatistica-doc-label">MB Total</div>
+                        </div>
+                        <div class="estatistica-doc-item">
+                            <div class="estatistica-doc-numero">2025</div>
+                            <div class="estatistica-doc-label">Última Atualização</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Busca de Documentos -->
+                <div class="busca-documentos">
+                    <label for="buscaDoc">🔍 Buscar:</label>
+                    <input type="text" id="buscaDoc" placeholder="Nome do documento...">
+                    
+                    <label for="filtroTipo">Tipo:</label>
+                    <select id="filtroTipo">
+                        <option value="">Todos os Tipos</option>
+                        <option value="PDF">PDF</option>
+                        <option value="DOC">DOC</option>
+                        <option value="XLS">XLS</option>
+                    </select>
+                    
+                    <label for="filtroCategoria">Categoria:</label>
+                    <select id="filtroCategoria">
+                        <option value="">Todas as Categorias</option>
+                        <option value="catalogos">Catálogos</option>
+                        <option value="manuais">Manuais</option>
+                        <option value="certificados">Certificados</option>
+                        <option value="formularios">Formulários</option>
+                    </select>
+                </div>
+
+                <div class="documentos-grid">
+                    <!-- Catálogos de Produtos -->
+                    <div class="categoria-documentos catalogos" data-categoria="catalogos">
+                        <h2>Catálogos de Produtos</h2>
+                        
+                        <div class="documento-item" data-nome="Catálogo Geral 2025" data-tipo="PDF">
+                            <div class="documento-titulo">Catálogo Geral 2025</div>
+                            <div class="documento-descricao">Catálogo completo com todos os produtos disponíveis, especificações técnicas e códigos de referência.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">12.5 MB</span>
+                                <span class="documento-data">Atualizado em Jan/2025</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Catálogo Peças de Motor" data-tipo="PDF">
+                            <div class="documento-titulo">Catálogo Peças de Motor</div>
+                            <div class="documento-descricao">Catálogo especializado em componentes de motor com aplicações detalhadas por modelo de veículo.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">8.2 MB</span>
+                                <span class="documento-data">Atualizado em Dez/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Catálogo Sistema de Freios" data-tipo="PDF">
+                            <div class="documento-titulo">Catálogo Sistema de Freios</div>
+                            <div class="documento-descricao">Guia completo de pastilhas, discos e componentes do sistema de freios com tabela de aplicações.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">6.8 MB</span>
+                                <span class="documento-data">Atualizado em Nov/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Catálogo Suspensão" data-tipo="PDF">
+                            <div class="documento-titulo">Catálogo Suspensão</div>
+                            <div class="documento-descricao">Amortecedores, molas e componentes de suspensão com especificações técnicas detalhadas.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">5.4 MB</span>
+                                <span class="documento-data">Atualizado em Out/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Catálogo Elétrica" data-tipo="PDF">
+                            <div class="documento-titulo">Catálogo Sistema Elétrico</div>
+                            <div class="documento-descricao">Baterias, alternadores, motores de partida e componentes elétricos automotivos.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">7.1 MB</span>
+                                <span class="documento-data">Atualizado em Set/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Catálogo Acessórios" data-tipo="PDF">
+                            <div class="documento-titulo">Catálogo Acessórios</div>
+                            <div class="documento-descricao">Óleos, filtros, pneus e acessórios diversos para manutenção automotiva.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">4.9 MB</span>
+                                <span class="documento-data">Atualizado em Ago/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manuais Técnicos -->
+                    <div class="categoria-documentos manuais" data-categoria="manuais">
+                        <h2>Manuais Técnicos</h2>
+                        
+                        <div class="documento-item" data-nome="Manual de Instalação Pastilhas" data-tipo="PDF">
+                            <div class="documento-titulo">Manual de Instalação - Pastilhas de Freio</div>
+                            <div class="documento-descricao">Guia passo a passo para instalação correta de pastilhas de freio com dicas de segurança.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">3.2 MB</span>
+                                <span class="documento-data">Atualizado em Jan/2025</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Manual Amortecedores" data-tipo="PDF">
+                            <div class="documento-titulo">Manual Técnico - Amortecedores</div>
+                            <div class="documento-descricao">Procedimentos de instalação, diagnóstico e manutenção de amortecedores automotivos.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">4.7 MB</span>
+                                <span class="documento-data">Atualizado em Dez/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Manual Sistema Elétrico" data-tipo="PDF">
+                            <div class="documento-titulo">Manual Sistema Elétrico Automotivo</div>
+                            <div class="documento-descricao">Diagnóstico e reparo de componentes elétricos, incluindo alternadores e motores de partida.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">6.3 MB</span>
+                                <span class="documento-data">Atualizado em Nov/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Manual Filtros" data-tipo="PDF">
+                            <div class="documento-titulo">Manual de Filtros Automotivos</div>
+                            <div class="documento-descricao">Tipos de filtros, intervalos de troca e procedimentos de substituição.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">2.8 MB</span>
+                                <span class="documento-data">Atualizado em Out/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Manual Velas Ignição" data-tipo="PDF">
+                            <div class="documento-titulo">Manual Velas de Ignição</div>
+                            <div class="documento-descricao">Especificações, instalação e diagnóstico de velas de ignição por tipo de motor.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">3.5 MB</span>
+                                <span class="documento-data">Atualizado em Set/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Manual Óleos Lubrificantes" data-tipo="PDF">
+                            <div class="documento-titulo">Manual Óleos e Lubrificantes</div>
+                            <div class="documento-descricao">Guia de especificações SAE, viscosidades e aplicações por tipo de motor.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">4.1 MB</span>
+                                <span class="documento-data">Atualizado em Ago/2024</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificados -->
+                    <div class="categoria-documentos certificados" data-categoria="certificados">
+                        <h2>Certificados e Qualidade</h2>
+                        
+                        <div class="documento-item" data-nome="Certificado ISO 9001" data-tipo="PDF">
+                            <div class="documento-titulo">Certificado ISO 9001:2015</div>
+                            <div class="documento-descricao">Certificação de Sistema de Gestão da Qualidade válida até dezembro de 2026.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">1.2 MB</span>
+                                <span class="documento-data">Válido até Dez/2026</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Certificado INMETRO" data-tipo="PDF">
+                            <div class="documento-titulo">Certificado INMETRO</div>
+                            <div class="documento-descricao">Certificação de conformidade para comercialização de autopeças no Brasil.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">0.8 MB</span>
+                                <span class="documento-data">Válido até Jun/2025</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Certificado Ambiental" data-tipo="PDF">
+                            <div class="documento-titulo">Certificado Gestão Ambiental</div>
+                            <div class="documento-descricao">Certificação ISO 14001 para gestão ambiental e sustentabilidade.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">1.5 MB</span>
+                                <span class="documento-data">Válido até Mar/2026</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Licença Funcionamento" data-tipo="PDF">
+                            <div class="documento-titulo">Licença de Funcionamento</div>
+                            <div class="documento-descricao">Licença municipal para funcionamento do estabelecimento comercial.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">0.6 MB</span>
+                                <span class="documento-data">Válida até Dez/2025</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Certificado Bombeiros" data-tipo="PDF">
+                            <div class="documento-titulo">Auto de Vistoria do Corpo de Bombeiros</div>
+                            <div class="documento-descricao">Certificado de segurança contra incêndio e pânico do estabelecimento.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">0.9 MB</span>
+                                <span class="documento-data">Válido até Set/2025</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Certificado Fornecedores" data-tipo="PDF">
+                            <div class="documento-titulo">Certificados de Fornecedores</div>
+                            <div class="documento-descricao">Compilação de certificados de qualidade dos principais fornecedores parceiros.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">3.7 MB</span>
+                                <span class="documento-data">Atualizado em Jan/2025</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulários -->
+                    <div class="categoria-documentos formularios" data-categoria="formularios">
+                        <h2>Formulários e Documentos</h2>
+                        
+                        <div class="documento-item" data-nome="Ficha Cadastral Cliente" data-tipo="DOC">
+                            <div class="documento-titulo">Ficha de Cadastro de Cliente</div>
+                            <div class="documento-descricao">Formulário para cadastro de novos clientes pessoa física e jurídica.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">0.3 MB</span>
+                                <span class="documento-data">Versão 2025.1</span>
+                                <span class="documento-tipo">DOC</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Pedido Orçamento" data-tipo="XLS">
+                            <div class="documento-titulo">Formulário de Pedido de Orçamento</div>
+                            <div class="documento-descricao">Planilha para solicitação de orçamentos com lista de produtos desejados.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">0.5 MB</span>
+                                <span class="documento-data">Versão 2025.1</span>
+                                <span class="documento-tipo">XLS</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Termo Garantia" data-tipo="PDF">
+                            <div class="documento-titulo">Termo de Garantia</div>
+                            <div class="documento-descricao">Documento oficial de garantia dos produtos com condições e prazos.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">0.4 MB</span>
+                                <span class="documento-data">Versão 2025.1</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Política Troca Devolução" data-tipo="PDF">
+                            <div class="documento-titulo">Política de Troca e Devolução</div>
+                            <div class="documento-descricao">Documento com as regras e procedimentos para trocas e devoluções.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">0.6 MB</span>
+                                <span class="documento-data">Atualizado em Jan/2025</span>
+                                <span class="documento-tipo">PDF</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Contrato Fornecimento" data-tipo="DOC">
+                            <div class="documento-titulo">Contrato de Fornecimento</div>
+                            <div class="documento-descricao">Modelo de contrato para fornecimento regular de peças para oficinas.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">0.7 MB</span>
+                                <span class="documento-data">Versão 2025.1</span>
+                                <span class="documento-tipo">DOC</span>
+                            </div>
+                        </div>
+
+                        <div class="documento-item" data-nome="Tabela Preços" data-tipo="XLS">
+                            <div class="documento-titulo">Tabela de Preços Atualizada</div>
+                            <div class="documento-descricao">Planilha com preços atualizados de todos os produtos em estoque.</div>
+                            <div class="documento-info">
+                                <span class="documento-tamanho">1.8 MB</span>
+                                <span class="documento-data">Atualizada em Jan/2025</span>
+                                <span class="documento-tipo">XLS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal para visualização de documentos -->
+                <div id="modalDocumento" class="modal-documento">
+                    <div class="modal-content">
+                        <span class="modal-close">&times;</span>
+                        <h2 id="modalTitulo">Título do Documento</h2>
+                        <p id="modalDescricao">Descrição do documento...</p>
+                        <div style="margin: 2rem 0; text-align: center;">
+                            <p style="color: #666; margin-bottom: 1rem;">Este é um documento de demonstração. Em um site real, aqui seria exibido o conteúdo do documento ou um link para download.</p>
+                            <a href="#" class="btn-download" id="btnDownload">📥 Baixar Documento</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Adicionais -->
+                <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin: 3rem 0;">
+                    <h2 class="section-title" style="margin-bottom: 2rem;">Informações sobre os Documentos</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem;">🔒 Acesso</h3>
+                            <p style="color: #666; line-height: 1.6;">A maioria dos documentos está disponível para download livre. Alguns documentos técnicos específicos podem requerer cadastro prévio ou aprovação.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem;">📱 Compatibilidade</h3>
+                            <p style="color: #666; line-height: 1.6;">Todos os documentos são otimizados para visualização em dispositivos móveis e desktop. Recomendamos o Adobe Reader para melhor experiência.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem;">🔄 Atualizações</h3>
+                            <p style="color: #666; line-height: 1.6;">Nossa biblioteca é atualizada regularmente. Documentos técnicos são revisados trimestralmente e catálogos são atualizados conforme novos produtos.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--cor-primaria); margin-bottom: 1rem;">📞 Suporte</h3>
+                            <p style="color: #666; line-height: 1.6;">Para dúvidas sobre documentos específicos ou solicitação de documentos não listados, entre em contato com nossa equipe técnica.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 (11) 98765-4321</p>
+                    <p>✉️ contato@hardautopecas.com.br</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Rua das Autopeças, 1234</p>
+                    <p>Vila Industrial - São Paulo/SP</p>
+                    <p>CEP: 01234-567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 18h</p>
+                    <p>Sábado: 8h às 12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hard Auto Peças. Todos os direitos reservados.</p>
+                <p>Desenvolvido por: Grupo 1 - Programação Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="voltar-topo" id="voltarTopo">↑</a>
+
+    <script>
+        // Botão voltar ao topo
+        const voltarTopo = document.getElementById('voltarTopo');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                voltarTopo.classList.add('show');
+            } else {
+                voltarTopo.classList.remove('show');
+            }
+        });
+
+        voltarTopo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Sistema de busca e filtros
+        const buscaDoc = document.getElementById('buscaDoc');
+        const filtroTipo = document.getElementById('filtroTipo');
+        const filtroCategoria = document.getElementById('filtroCategoria');
+        const documentos = document.querySelectorAll('.documento-item');
+        const categorias = document.querySelectorAll('.categoria-documentos');
+
+        function filtrarDocumentos() {
+            const busca = buscaDoc.value.toLowerCase();
+            const tipo = filtroTipo.value;
+            const categoria = filtroCategoria.value;
+
+            categorias.forEach(cat => {
+                let temDocumentoVisivel = false;
+                const docsCategoria = cat.querySelectorAll('.documento-item');
+                
+                docsCategoria.forEach(doc => {
+                    const nome = doc.getAttribute('data-nome').toLowerCase();
+                    const tipoDoc = doc.getAttribute('data-tipo');
+                    const categoriaDoc = cat.getAttribute('data-categoria');
+
+                    const buscaMatch = !busca || nome.includes(busca);
+                    const tipoMatch = !tipo || tipoDoc === tipo;
+                    const categoriaMatch = !categoria || categoriaDoc === categoria;
+
+                    if (buscaMatch && tipoMatch && categoriaMatch) {
+                        doc.style.display = '';
+                        temDocumentoVisivel = true;
+                    } else {
+                        doc.style.display = 'none';
+                    }
+                });
+
+                // Mostrar/ocultar categoria inteira se não há documentos visíveis
+                if (temDocumentoVisivel) {
+                    cat.style.display = '';
+                } else {
+                    cat.style.display = 'none';
+                }
+            });
+        }
+
+        buscaDoc.addEventListener('input', filtrarDocumentos);
+        filtroTipo.addEventListener('change', filtrarDocumentos);
+        filtroCategoria.addEventListener('change', filtrarDocumentos);
+
+        // Modal de documentos
+        const modal = document.getElementById('modalDocumento');
+        const modalTitulo = document.getElementById('modalTitulo');
+        const modalDescricao = document.getElementById('modalDescricao');
+        const modalClose = document.querySelector('.modal-close');
+        const btnDownload = document.getElementById('btnDownload');
+
+        documentos.forEach(doc => {
+            doc.addEventListener('click', function() {
+                const titulo = this.querySelector('.documento-titulo').textContent;
+                const descricao = this.querySelector('.documento-descricao').textContent;
+                
+                modalTitulo.textContent = titulo;
+                modalDescricao.textContent = descricao;
+                modal.style.display = 'block';
+            });
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        btnDownload.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Em um site real, aqui seria iniciado o download do documento.');
+        });
+
+        // Animação de entrada das categorias
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.categoria-documentos, .estatisticas-docs, .busca-documentos').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.6s ease';
+            observer.observe(element);
+        });
+
+        // Contador animado para estatísticas
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 30);
+        }
+
+        // Iniciar animação dos contadores quando visíveis
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numero = entry.target.querySelector('.estatistica-doc-numero');
+                    const target = parseInt(numero.textContent);
+                    if (!isNaN(target)) {
+                        animateCounter(numero, target);
+                    }
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.estatistica-doc-item').forEach(item => {
+            statsObserver.observe(item);
+        });
+    </script>
+</body>
+</html>

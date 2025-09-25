@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Hard Auto Peças</title>
+    <meta name="description" content="Conheça a história da Hard Auto Peças, nossa missão, visão e valores. Mais de 20 anos de tradição no mercado automotivo.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E50914'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>H</text></svg>">
+    <style>
+        body {
+            background: linear-gradient(45deg, #f8f8f8 0%, #e8e8e8 100%);
+        }
+        
+        .texto-section {
+            background: white;
+            margin: 2rem 0;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .texto-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .texto-section h2 {
+            font-family: var(--fonte-titulos);
+            font-size: 2rem;
+            color: var(--cor-primaria);
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--cor-secundaria);
+            padding-left: 1rem;
+        }
+        
+        .texto-section p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            color: #444;
+        }
+        
+        .destaque {
+            background: linear-gradient(135deg, rgba(255,107,0,0.1), rgba(255,204,0,0.1));
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--cor-secundaria);
+            margin: 1.5rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--cor-secundaria), var(--cor-destaque));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--cor-secundaria);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--cor-secundaria);
+        }
+        
+        .equipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .membro-equipe {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .membro-equipe:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, var(--cor-apoio), #e8e8e8);
+        }
+        
+        .membro-equipe h4 {
+            font-family: var(--fonte-titulos);
+            color: var(--cor-primaria);
+            margin-bottom: 0.5rem;
+        }
+        
+        .voltar-inicio {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .voltar-inicio a {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--cor-secundaria), #ff8533);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,107,0,0.3);
+        }
+        
+        .voltar-inicio a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,107,0,0.4);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">HARD AUTO PEÇAS</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="documentos.html">Documentos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Sobre a Hard Auto Peças</h1>
+
+                <!-- Seção 1: Nossa História -->
+                <div class="texto-section">
+                    <h2>1. Nossa História</h2>
+                    <p>A Hard Auto Peças nasceu em 2003 com o sonho de oferecer peças automotivas de qualidade superior para o mercado brasileiro. Fundada por João Silva, um apaixonado por automóveis com mais de 30 anos de experiência no setor, a empresa começou como uma pequena loja no bairro da Vila Industrial, em São Paulo.</p>
+                    <p>Desde o início, nossa filosofia sempre foi clara: fornecer peças automotivas de primeira linha, tanto nacionais quanto importadas, com preços justos e atendimento diferenciado. O que começou como um negócio familiar cresceu e se tornou uma das principais referências em autopeças da região metropolitana de São Paulo.</p>
+                    <div class="destaque">
+                        <p><strong>Mais de 20 anos de tradição</strong> no mercado automotivo, sempre priorizando a satisfação do cliente e a qualidade dos produtos.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 2: Missão -->
+                <div class="texto-section">
+                    <h2>2. Nossa Missão</h2>
+                    <p>Nossa missão é fornecer peças e acessórios automotivos de alta qualidade, contribuindo para a segurança e performance dos veículos de nossos clientes. Buscamos constantemente a excelência no atendimento, oferecendo soluções completas e personalizadas para cada necessidade.</p>
+                    <p>Trabalhamos incansavelmente para manter nosso estoque sempre atualizado com as mais modernas tecnologias do mercado automotivo, garantindo que nossos clientes tenham acesso aos melhores produtos disponíveis, sejam eles nacionais ou importados.</p>
+                </div>
+
+                <!-- Seção 3: Visão -->
+                <div class="texto-section">
+                    <h2>3. Nossa Visão</h2>
+                    <p>Ser reconhecida como a principal referência em peças automotivas no Brasil, expandindo nossa presença nacional e mantendo os mais altos padrões de qualidade e atendimento. Queremos ser a primeira escolha de mecânicos, oficinas e proprietários de veículos em todo o país.</p>
+                    <p>Vislumbramos um futuro onde a Hard Auto Peças seja sinônimo de confiabilidade, inovação e excelência, contribuindo para o desenvolvimento sustentável do setor automotivo brasileiro através de parcerias estratégicas e investimentos em tecnologia.</p>
+                </div>
+
+                <!-- Seção 4: Valores -->
+                <div class="texto-section">
+                    <h2>4. Nossos Valores</h2>
+                    <p>Os valores que norteiam todas as nossas ações e decisões são fundamentais para o sucesso da Hard Auto Peças:</p>
+                    <div class="destaque">
+                        <p><strong>Qualidade:</strong> Oferecemos apenas produtos que atendem aos mais rigorosos padrões de qualidade internacional.</p>
+                        <p><strong>Confiabilidade:</strong> Construímos relacionamentos duradouros baseados na confiança e transparência.</p>
+                        <p><strong>Inovação:</strong> Estamos sempre em busca das mais modernas tecnologias e soluções do mercado.</p>
+                        <p><strong>Sustentabilidade:</strong> Promovemos práticas ambientalmente responsáveis em todos os nossos processos.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 5: Linha do Tempo -->
+                <div class="texto-section">
+                    <h2>5. Marcos Históricos</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>2003 - Fundação</h4>
+                            <p>Abertura da primeira loja na Vila Industrial, São Paulo, com foco em peças nacionais.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2008 - Expansão</h4>
+                            <p>Início da importação de peças especializadas e ampliação do estoque.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2012 - Certificação</h4>
+                            <p>Obtenção da certificação ISO 9001 para gestão da qualidade.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2018 - E-commerce</h4>
+                            <p>Lançamento da plataforma online para vendas em todo o Brasil.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2023 - 20 Anos</h4>
+                            <p>Comemoração de duas décadas de sucesso e liderança no mercado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção 6: Produtos e Serviços -->
+                <div class="texto-section">
+                    <h2>6. Produtos e Serviços</h2>
+                    <p>A Hard Auto Peças oferece uma linha completa de produtos para todos os tipos de veículos. Nosso catálogo inclui peças para motor, sistema de freios, suspensão, sistema elétrico, transmissão e uma vasta gama de acessórios automotivos.</p>
+                    <p>Além da venda de peças, oferecemos serviços especializados como consultoria técnica, identificação de peças por chassi, orçamentos personalizados e suporte pós-venda. Nossa equipe técnica está sempre disponível para auxiliar na escolha da peça correta para cada aplicação.</p>
+                </div>
+
+                <!-- Seção 7: Qualidade e Certificações -->
+                <div class="texto-section">
+                    <h2>7. Qualidade e Certificações</h2>
+                    <p>A qualidade é o pilar fundamental de nossa empresa. Todos os produtos comercializados pela Hard Auto Peças passam por rigorosos testes de qualidade e são fornecidos apenas por fabricantes certificados e reconhecidos no mercado internacional.</p>
+                    <p>Possuímos certificação ISO 9001:2015 para gestão da qualidade, garantindo que todos os nossos processos atendam aos mais altos padrões internacionais. Além disso, somos membros da ABIPEÇAS (Associação Brasileira da Indústria de Autopeças) e seguimos todas as normas e regulamentações do setor.</p>
+                </div>
+
+                <!-- Seção 8: Parcerias Estratégicas -->
+                <div class="texto-section">
+                    <h2>8. Parcerias Estratégicas</h2>
+                    <p>Ao longo dos anos, estabelecemos parcerias sólidas com os principais fabricantes nacionais e internacionais de autopeças. Trabalhamos diretamente com marcas renomadas como Bosch, Monroe, NGK, Cofap, Gates, Dayco, entre outras.</p>
+                    <p>Essas parcerias nos permitem oferecer produtos originais com garantia de fábrica, preços competitivos e disponibilidade constante de estoque. Mantemos relacionamentos comerciais em mais de 15 países, garantindo acesso às mais modernas tecnologias do mercado automotivo mundial.</p>
+                </div>
+
+                <!-- Seção 9: Responsabilidade Social -->
+                <div class="texto-section">
+                    <h2>9. Responsabilidade Social e Ambiental</h2>
+                    <p>A Hard Auto Peças acredita na importância da responsabilidade social e ambiental. Desenvolvemos programas de reciclagem de peças usadas, destinação adequada de resíduos e apoio a projetos sociais na comunidade local.</p>
+                    <p>Participamos ativamente de campanhas de conscientização sobre manutenção preventiva de veículos, contribuindo para a redução de acidentes e emissões poluentes. Nosso compromisso é com um futuro mais sustentável para o setor automotivo.</p>
+                    <div class="destaque">
+                        <p>Mais de 500 toneladas de peças recicladas anualmente, contribuindo para a preservação do meio ambiente.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 10: Tecnologia e Inovação -->
+                <div class="texto-section">
+                    <h2>10. Tecnologia e Inovação</h2>
+                    <p>Investimos constantemente em tecnologia para melhorar nossos processos e oferecer a melhor experiência aos nossos clientes. Nosso sistema de gestão integrado permite controle preciso de estoque, rastreabilidade de produtos e agilidade no atendimento.</p>
+                    <p>Utilizamos tecnologias avançadas como código de barras, RFID e inteligência artificial para otimizar a logística e garantir a precisão na identificação e entrega de peças. Nossa plataforma de e-commerce oferece recursos modernos como busca por chassi, comparação de produtos e chat online.</p>
+                </div>
+
+                <!-- Seção 11: Atendimento ao Cliente -->
+                <div class="texto-section">
+                    <h2>11. Excelência no Atendimento</h2>
+                    <p>O atendimento diferenciado é uma das principais características da Hard Auto Peças. Nossa equipe é formada por profissionais especializados e constantemente treinados para oferecer o melhor suporte técnico e comercial.</p>
+                    <p>Disponibilizamos múltiplos canais de atendimento: loja física, telefone, e-mail, chat online e redes sociais. Nosso compromisso é responder todas as solicitações em até 2 horas durante o horário comercial, garantindo agilidade e eficiência no atendimento.</p>
+                </div>
+
+                <!-- Seção 12: Logística e Distribuição -->
+                <div class="texto-section">
+                    <h2>12. Logística e Distribuição</h2>
+                    <p>Nossa estrutura logística permite entregas rápidas e seguras em todo o território nacional. Contamos com um centro de distribuição moderno de 5.000m², localizado estrategicamente em São Paulo, com acesso facilitado às principais rodovias do país.</p>
+                    <p>Trabalhamos com as principais transportadoras do Brasil, oferecendo diferentes opções de frete e prazo de entrega. Para a região metropolitana de São Paulo, disponibilizamos entrega expressa no mesmo dia para pedidos realizados até às 14h.</p>
+                </div>
+
+                <!-- Seção 13: Nossa Equipe -->
+                <div class="texto-section">
+                    <h2>13. Nossa Equipe</h2>
+                    <p>A Hard Auto Peças conta com uma equipe de mais de 50 colaboradores especializados em diferentes áreas do mercado automotivo. Nossos profissionais possuem formação técnica e experiência prática, garantindo conhecimento profundo sobre os produtos e aplicações.</p>
+                    
+                    <div class="equipe-grid">
+                        <div class="membro-equipe">
+                            <h4>João Silva</h4>
+                            <p>Fundador e Diretor Geral</p>
+                            <p>30+ anos de experiência</p>
+                        </div>
+                        <div class="membro-equipe">
+                            <h4>Maria Santos</h4>
+                            <p>Gerente Comercial</p>
+                            <p>Especialista em importação</p>
+                        </div>
+                        <div class="membro-equipe">
+                            <h4>Carlos Oliveira</h4>
+                            <p>Supervisor Técnico</p>
+                            <p>Engenheiro Mecânico</p>
+                        </div>
+                        <div class="membro-equipe">
+                            <h4>Ana Costa</h4>
+                            <p>Coordenadora de Qualidade</p>
+                            <p>Certificação ISO 9001</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção 14: Perspectivas Futuras -->
+                <div class="texto-section">
+                    <h2>14. Perspectivas Futuras</h2>
+                    <p>O futuro da Hard Auto Peças está alinhado com as tendências do mercado automotivo mundial. Estamos investindo em pesquisa e desenvolvimento de peças para veículos elétricos e híbridos, preparando-nos para a transição energética do setor.</p>
+                    <p>Nossos planos incluem a expansão para novos mercados, abertura de filiais em outras regiões do Brasil e o desenvolvimento de uma linha própria de produtos com a marca Hard Auto Peças. Continuaremos investindo em tecnologia, sustentabilidade e capacitação de nossa equipe para manter nossa posição de liderança no mercado.</p>
+                    <div class="destaque">
+                        <p>Meta para 2030: Ser a maior rede de autopeças do Brasil, com presença em todas as capitais e principais cidades do interior.</p>
+                    </div>
+                </div>
+
+                <!-- Link para voltar ao início -->
+                <div class="voltar-inicio">
+                    <a href="#top">⬆️ Voltar ao Início da Página</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 (11) 98765-4321</p>
+                    <p>✉️ contato@hardautopecas.com.br</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Endereço</h3>
+                    <p>Rua das Autopeças, 1234</p>
+                    <p>Vila Industrial - São Paulo/SP</p>
+                    <p>CEP: 01234-567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 18h</p>
+                    <p>Sábado: 8h às 12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hard Auto Peças. Todos os direitos reservados.</p>
+                <p>Desenvolvido por: Grupo 1 - Programação Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="voltar-topo" id="voltarTopo">↑</a>
+
+    <script>
+        // Botão voltar ao topo
+        const voltarTopo = document.getElementById('voltarTopo');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                voltarTopo.classList.add('show');
+            } else {
+                voltarTopo.classList.remove('show');
+            }
+        });
+
+        voltarTopo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll para o link "voltar ao início"
+        document.querySelector('.voltar-inicio a').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animação de entrada das seções
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.texto-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
